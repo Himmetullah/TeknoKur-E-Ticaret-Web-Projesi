@@ -1,0 +1,164 @@
+﻿@model List<Layer.Data.TblUrun>
+@{
+    ViewData["Title"] = "Arama";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<style>
+    .product-details-2 h3 a {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        line-height: 1.2;
+        height: 2.4em;
+    }
+
+    .product-details-2 p {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+        min-height: 3em;
+        line-height: 1.5;
+    }
+</style>
+<div class="breadcrumb-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-content text-center">
+                    <div class="breadcrumb-title">
+                        <h3><a href="#">"@ViewBag.AramaKelimesi" için sonuçlar</a></h3>
+                    </div>
+                    <ul>
+                        <li><a href="~/"><i class="fa fa-home"></i></a></li>
+                        <li class="active"><a href="#"><i class="fa fa-angle-right"></i>@ViewBag.KategoriAdi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <p>Ürün bulunamadı.</p>
+}
+else
+{
+    <div class="shop-main-area mb-70">
+        <div class="container">
+            <div class="col-lg-12 col-md-12 col-12">
+                <div class="row">
+                    @foreach (var urun in Model)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="product-wrapper-2">
+                                <div class="product-img">
+                                    <a href="~/@urun.UrunSeo">
+                                        <img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="first" />
+                                        <img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="second" />
+                                    </a>
+                                </div>
+                                <div class="product-details-2">
+                                    <h3><a href="~/@urun.UrunSeo">@urun.UrunAdi</a></h3>
+                                    <div class="product-rating mb-10 color">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            <a href="#"><i class="fa fa-star"></i></a>
+                                        }
+                                    </div>
+                                    <div class="product-price">
+                                        <ul>
+                                            <li class="new-price">@urun.UrunFiyat.ToString("C2")</li>
+                                        </ul>
+                                    </div>
+                                    <p>@urun.UrunAciklama</p>
+                                    <div class="action-inner mt-20">
+                                        <div class="product-button-3">
+                                            <a href="javascript:void(0)" class="sepete-ekle-btn" data-id="@urun.UrunId">
+                                                <i class="fa fa-shopping-cart"></i> Sepete Ekle
+                                            </a>
+                                        </div>
+                                        <div class="add-to-links">
+                                            <ul>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="favori-ekle-kaldir" data-id="@urun.UrunId">
+                                                        <i class="fa fa-heart-o"></i>
+                                                    </a>
+                                                </li>
+                                                <li><a href="#" data-bs-toggle="modal" data-bs-target="#mymodal-@urun.UrunId"><i class="fa fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="modal fade" id="mymodal-@urun.UrunId" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="modal-img">
+                                                            <div class="single-img">
+                                                                <img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="primary" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="model-text">
+                                                            <h2>@urun.UrunAdi</h2>
+                                                            <div class="product-rating">
+                                                                @for (int i = 0; i < 5; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                            </div>
+                                                            <div class="price-rate">
+                                                                <span class="new-price">@urun.UrunFiyat.ToString("C2")</span>
+                                                            </div>
+                                                            <div class="short-description mt-20">
+                                                                <p>@urun.UrunAciklama</p>
+                                                            </div>
+                                                            <form method="post" action="/Sepet/Ekle">
+                                                                <input type="hidden" name="urunId" value="@urun.UrunId" />
+                                                                <input type="number" name="adet" value="1" min="1" max="@urun.Stok" />
+                                                                <button type="submit" class="sepete-ekle-btn" data-id="@urun.UrunId">Sepete Ekle</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="availability">
+                                        <span>@(urun.Stok > 0 ? "Stokta var" : "Stokta yok")</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $.get("/Favori/UrunIdler", function (res) {
+                if (res && res.urunIdler && Array.isArray(res.urunIdler)) {
+                    res.urunIdler.forEach(function (id) {
+                        const btn = $('.favori-ekle-kaldir[data-id="' + id + '"]');
+                        const icon = btn.find("i");
+                        icon.removeClass("fa-heart-o").addClass("fa-heart");
+                    });
+                }
+            });
+        });
+    </script>
+}

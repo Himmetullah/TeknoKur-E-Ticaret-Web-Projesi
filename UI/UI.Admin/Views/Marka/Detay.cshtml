@@ -1,0 +1,81 @@
+﻿@model Layer.Data.TblMarka
+@{
+	ViewData["Title"] = "Detay";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div>
+	<h1>Marka Detay</h1>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MarkaId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MarkaAdi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaAdi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MarkaSeo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaSeo)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.EkleyenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.EkleyenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.EklenmeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.EklenmeTarihi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Silik)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Silik)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.SilenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.SilenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.SilmeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.SilmeTarihi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.GuncelleyenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.GuncelleyenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.GuncellemeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.GuncellemeTarihi)
+		</dd>
+	</dl>
+
+</div>
+<div>
+	@Html.ActionLink("Düzenle", "Duzenle", new { id = Model.MarkaId }) |
+	<a href="/Marka">Listeye Dön</a>
+</div>
+
+

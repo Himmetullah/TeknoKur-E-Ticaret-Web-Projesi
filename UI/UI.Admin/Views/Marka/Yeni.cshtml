@@ -1,0 +1,44 @@
+﻿@using Layer.Data;
+@{
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+	<h2>Marka Ekleme formu</h2>
+	<hr />
+
+	@if (ViewBag.ErrorMessage != null)
+	{
+		<div class="alert alert-danger">
+			@ViewBag.ErrorMessage
+		</div>
+	}
+
+	<div class="col-md-4">
+		@using (Html.BeginForm("Yeni", "Marka", FormMethod.Post))
+		{
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="MarkaAdi" placeholder="Benzersiz Marka Adı" name="MarkaAdi">
+					<label for="MarkaAdi">Marka Adı</label>
+				</div>
+			</div>
+		<div class="col-md-12">
+			<div class="d-flex align-items-center justify-content-md-end justify-content-center">
+				<a href="/Marka">Marka Listesine Git</a>
+				<div class="add-new">
+					<button class="btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+						<i class="ri-add-line me-0 me-sm-1 d-inline-block d-sm-none"></i>
+						<span class="d-none d-sm-inline-block"> Kaydet </span>
+					</button>
+				</div>
+			</div>
+		</div>
+				}
+	</div>
+</div>
+
+
+
+

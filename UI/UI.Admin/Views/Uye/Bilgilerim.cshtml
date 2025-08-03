@@ -1,0 +1,14 @@
+﻿@model Layer.Data.VwUyeKisi
+@{
+    ViewData["Title"] = "Bilgilerim";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Kullanıcı Bilgileriniz</h3>
+<table class="table">
+    <tr><th>Ad Soyad</th><td>@Model.KisiAd @Model.KisiSoyad</td></tr>
+    <tr><th>T.C.</th><td>@Model.KisiTc</td></tr>
+    <tr><th>Doğum Tarihi</th><td>@Model.KisiDogumTarihi?.ToString("dd.MM.yyyy")</td></tr>
+    <tr><th>Cinsiyet</th><td>@Model.KisiCinsiyet</td></tr>
+    <tr><th>Email</th><td>@Model.UyeMailAdresi</td></tr>
+</table>

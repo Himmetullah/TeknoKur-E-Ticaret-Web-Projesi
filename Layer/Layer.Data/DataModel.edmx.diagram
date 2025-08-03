@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4eb156ad3d5c47b39a221eecddeb1d2b" Name="Diagram1">
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblKategoriler" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblMarka" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblUrun" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_Urunler_Kategoriler" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_Urunler_Markalar" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblUyeKisi" Width="1.5" PointX="6.125" PointY="0.75" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblUye" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblUyeKisi_TblUye" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblKisiAdres" Width="1.5" PointX="8.375" PointY="12.5" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblKisiTelefon" Width="1.5" PointX="8.375" PointY="8.375" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblKisiAdres_TblUyeKisi" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblKisiTelefon_TblUyeKisi" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblFavori" Width="1.5" PointX="11" PointY="3.75" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.VwKisiAdresTelefon" Width="1.5" PointX="0.75" PointY="10.75" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblFavori_TblUrun" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblFavori_TblUye" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblSepet" Width="1.5" PointX="5.25" PointY="5" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_Sepetler_Urunler" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblSiteAyarlar" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblSiparis" Width="1.5" PointX="10.625" PointY="7.5" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblSiparisDetay" Width="1.5" PointX="13.875" PointY="5.375" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_SiparisDetay_Siparis" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblSiparis_Uye" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_SiparisDetay_Urun" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_TblSiparis_Adres" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.VwSiparisUrun" Width="1.5" PointX="10.375" PointY="11.75" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.TblYorum" Width="1.5" PointX="5.25" PointY="14.125" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_Yorumlar_Urunler" />
+        <AssociationConnector Association="DbTeknoKurModel.FK_Yorum_Uye" />
+        <EntityTypeShape EntityType="DbTeknoKurModel.VwUyeKisi" Width="1.5" PointX="5.375" PointY="8.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

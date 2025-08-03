@@ -1,0 +1,68 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@if (ViewBag.Mesaj != null)
+{
+	<div class="alert alert-success text-center">@ViewBag.Mesaj</div>
+}
+
+<section class="login__section pt-60 pb-60">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-md-10">
+				<div class="login__wrap">
+					<div class="login-title text-center mb-30">
+						<h2>Kayıt Ol</h2>
+					</div>
+
+					<form method="post" asp-controller="Uye" asp-action="KayitOl" class="login__form">
+						<div class="row">
+							<div class="col-md-6 mb-20">
+								<label>Ad</label>
+								<input type="text" class="form-control" name="Ad" placeholder="Adınız" required />
+							</div>
+							<div class="col-md-6 mb-20">
+								<label>Soyad</label>
+								<input type="text" class="form-control" name="Soyad" placeholder="Soyadınız" required />
+							</div>
+							<div class="col-md-6 mb-20">
+								<label>E-mail</label>
+								<input type="email" class="form-control" name="Mail" placeholder="E-posta adresiniz" required />
+							</div>
+							<div class="col-md-6 mb-20">
+								<label>T.C. Kimlik</label>
+								<input type="text" class="form-control" name="Tc" placeholder="11 Haneli TC Kimlik" required />
+							</div>
+							<div class="col-md-6 mb-20">
+								<label>Doğum Tarihi</label>
+								<input type="date" class="form-control" name="DogumTarihi" required />
+							</div>
+							<div class="col-md-6 mb-20">
+								<label>Cinsiyet</label>
+								<select class="form-control" name="Cinsiyet" required>
+									<option value="">Seçiniz</option>
+									<option value="1">Erkek</option>
+									<option value="2">Kadın</option>
+								</select>
+							</div>
+							<div class="col-12 mb-30">
+								<label>Şifre</label>
+								<input type="password" class="form-control" name="Sifre" placeholder="Şifrenizi giriniz" required />
+							</div>
+						</div>
+
+						<div class="text-center">
+							<button type="submit" class="btn btn-success">Kayıt Ol</button>
+						</div>
+					</form>
+
+					<div class="login__footer text-center mt-20">
+						<p>Zaten hesabınız var mı? <a href="/Uye/GirisYap/">Giriş Yap</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

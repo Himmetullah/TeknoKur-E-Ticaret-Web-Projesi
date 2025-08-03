@@ -1,0 +1,402 @@
+﻿@using Layer.Business.Classes
+@using Layer.Data
+@{
+	var userSession = Context.Request.Cookies["UserSession"];
+	var nameSurname = Context.Request.Cookies["NameSurname"];
+
+	Layer.Business.Classes.Kategori.TKategori kategoriIslemleri = new();
+	List<TblKategoriler> Kategoriler = kategoriIslemleri.KategoriListesiGetir();
+	var ustKategoriler = Kategoriler.Where(k => k.UstKategoriId == null).ToList();
+
+	var altKategoriler = Kategoriler
+		.Where(k => k.UstKategoriId != null && k.Silik != true)
+		.ToList();
+
+	var alt1 = altKategoriler.Skip(0).Take(6).ToList();
+	var alt2 = altKategoriler.Skip(6).Take(6).ToList();
+	var alt3 = altKategoriler.Skip(12).Take(6).ToList();
+
+	Layer.Business.Classes.Ortak.TAyarlar ayarlar = new();
+	Layer.Entities.TResult result = ayarlar.SiteAyarlari();
+
+	if (result != null)
+	{
+		if (result.Veri == null)
+		{
+			<center><h3>@result.Mesaj</h3></center>
+			IgnoreBody();
+		}
+		else
+		{
+			var Data = (IEnumerable<Layer.Data.TblSiteAyarlar>)result.Veri;
+			var siteAyar = Data.FirstOrDefault();
+
+			if (siteAyar == null)
+			{
+				<center><h3>Site ayarları bulunamadı.</h3></center>
+				IgnoreBody();
+			}
+			else
+			{
+				bool siteAcik = siteAyar.SiteAcik == true;
+
+				if (!siteAcik)
+				{
+					<script>window.location.href = "/Kapali";</script>
+					return;
+				}
+
+				<!doctype html>
+				<html class="no-js" lang="en">
+
+				<head>
+					<style>
+						.search-area {
+							display: flex;
+							justify-content: center;
+						}
+
+						.search-form {
+							display: flex;
+							align-items: center;
+							justify-content: center;
+						}
+
+						.search-input-wrapper {
+							position: relative;
+							width: 400px;
+						}
+
+							.search-input-wrapper input {
+								width: 100%;
+								padding: 8px 35px 8px 12px;
+								border: 2px solid #c3d200;
+								border-radius: 30px;
+								background-color: white;
+								outline: none;
+								color: #333;
+								font-size: 14px;
+								text-align: left !important;
+								text-indent: 0px !important;
+							}
+
+
+							.search-input-wrapper button {
+								position: absolute;
+								right: 10px;
+								top: 50%;
+								transform: translateY(-50%);
+								background: none;
+								border: none;
+								cursor: pointer;
+								font-size: 16px;
+								color: #333;
+							}
+
+						.kendin-topla-btn-wrapper {
+							text-align: center;
+							margin-top: 15px;
+						}
+
+						.kendin-topla-btn {
+							display: inline-block;
+							padding: 10px 20px;
+							background-color: #A3D900;
+							color: #121212;
+							border: none;
+							border-radius: 5px;
+							font-weight: bold;
+							text-decoration: none;
+							transition: background-color 0.3s ease;
+							box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+						}
+
+							.kendin-topla-btn:hover {
+								background-color: #87b200;
+								color: #fff;
+							}
+
+							.kendin-topla-btn i {
+								margin-right: 8px;
+							}
+
+					</style>
+
+					<meta charset="utf-8">
+					<meta http-equiv="x-ua-compatible" content="ie=edge">
+					<title>@siteAyar.SiteBaslik</title>
+					<meta name="description" content="">
+					<meta name="viewport" content="width=device-width, initial-scale=1">
+
+					<!-- Favicon -->
+					<link rel="shortcut icon" type="image/x-icon" href="~/css/img/favicon.png">
+					<!-- all css here -->
+					<!-- bootstrap v3.3.6 css -->
+					<link rel="stylesheet" href="~/css/bootstrap.min.css">
+					<!-- animate css -->
+					<link rel="stylesheet" href="~/css/animate.css">
+					<!-- jquery-ui.min css -->
+					<link rel="stylesheet" href="~/css/jquery-ui.min.css">
+					<!-- meanmenu css -->
+					<link rel="stylesheet" href="~/css/meanmenu.min.css">
+					<!-- owl.carousel css -->
+					<link rel="stylesheet" href="~/css/owl.carousel.css">
+					<!-- font-awesome css -->
+					<link rel="stylesheet" href="~/css/font-awesome.min.css">
+					<!-- material-design-iconic-font.css -->
+					<link rel="stylesheet" href="~/css/material-design-iconic-font.css">
+					<!-- chosen.min.css -->
+					<link rel="stylesheet" href="~/css/chosen.min.css">
+					<!-- nivo-slider.css -->
+					<link rel="stylesheet" href="~/css/nivo-slider.css">
+					<!--flexslider.css -->
+					<link rel="stylesheet" href="~/css/flexslider.css">
+					<!-- style css -->
+					<link rel="stylesheet" href="~/css/style.css">
+					<!-- responsive css -->
+					<link rel="stylesheet" href="~/css/responsive.css">
+					<!-- modernizr css -->
+					<link rel="stylesheet" href="~/css/site.css" />
+
+				</head>
+
+				<body class="home-2">
+					<!-- header-area-start -->
+					<header>
+						<!-- header-mid-area-start -->
+						<div class="header-mid-area ptb-30">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-3 col-md-12 col-12">
+										<div class="logo-area">
+											<a href="~/"><img src="~/img/logo/11.png" alt="logo" /></a>
+										</div>
+									</div>
+
+									<div class="col-lg-5 col-md-8 col-12">
+										<div class="search-area">
+
+											<form action="/Urun/Arama" method="get" class="search-form">
+												<div class="search-input-wrapper">
+													<input type="text" name="arananKelime" placeholder="Ürün ara..." required />
+
+													<button type="submit" class="search-btn">
+														<i class="fa fa-search"></i>
+													</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-12 col-12">
+										<div class="cart-area">
+											<ul>
+												@if (userSession == null)
+												{
+													<li><a href="/Uye/KayitOl/"><img src="~/img/profile-user.png" /></a></li>
+												}
+												else
+												{
+													<li class="nav-item dropdown">
+														<a class="nav-link dropdown-toggle nav-user-name" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: 14px;">
+															@nameSurname
+														</a>
+														<ul class="dropdown-menu" aria-labelledby="userDropdown">
+															<li><a class="dropdown-item" href="/Uye/Detay">Bilgilerim</a></li>
+															<li><a class="dropdown-item" href="/Uye/CikisYap">Çıkış Yap</a></li>
+														</ul>
+													</li>
+												}
+												<li>
+													<a href="/Favori/Favoriler"><img src="/img/love.png"></a>
+													<span id="navbar-favori-count" class="cart-count">0</span>
+												</li>
+
+												<li>
+													<a href="/Sepet/Index/"><img src="/img/grocery-store.png"></a>
+													<span id="navbar-cart-count" class="cart-count">0</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<!-- header-mid-area-end -->
+						<!-- header-menu-area-start -->
+						<div class="header-menu-area" id="header-sticky">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-9 col-md-9 col-12 d-none d-lg-block">
+										<div class="main-menu">
+
+											<nav>
+												<ul class="main-menu">
+													@foreach (var ust in ustKategoriler)
+													{
+														var altKategori = Kategoriler
+														.Where(k => k.UstKategoriId == ust.KategoriId)
+														.ToList();
+
+														<li class="dropdown">
+															<a href="#">@ust.KategoriAdi <i class="fa fa-angle-down"></i></a>
+
+															@if (altKategori.Any())
+															{
+																<ul class="dropdown-menu">
+																	@foreach (var alt in altKategori)
+																	{
+																		<li><a href="/Urun/Kategori/@alt.KategoriSeo">@alt.KategoriAdi</a></li>
+																	}
+																</ul>
+															}
+														</li>
+													}
+													<li class="kendin-topla-menu-item" style="list-style: none;">
+														<a href="/KendinTopla/Index/" class="kendin-topla-btn">
+															<i class="fa fa-wrench"></i> Kendin Topla
+														</a>
+													</li>
+
+												</ul>
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- header-menu-area-end -->
+
+					</header>
+					<!-- header-area-end -->
+					<main>
+						@RenderBody()
+					</main>
+					<!-- footer-area-start -->
+					<footer>
+						<!-- footer-top-area-start -->
+						<div class="footer-top-area pt-80 pb-50">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-3 col-md-6  col-12">
+										<!-- single-footer-start -->
+										<div class="single-footer">
+											<div class="footer-logo mb-30">
+												<a href="~/css#"><img src="~/img/logo/12.png" alt="logo" /></a>
+											</div>
+											<p>TeknoKur e-ticaret sitesi...</p>
+											<div class="footer-address">
+												<ul>
+													<li><i class="fa fa-map-marker"></i>address :Your Address Goes Here</li>
+													<li><i class="fa fa-envelope"></i>Email :himmetullahgns@gmail.com</li>
+													<li><i class="fa fa-mobile"></i>Phone :+(1234) 567 890</li>
+												</ul>
+											</div>
+											<div class="social-link">
+												<ul>
+													<li><a href="~/css#"><i class="fa fa-facebook"></i></a></li>
+													<li><a href="~/css#"><i class="fa fa-twitter"></i></a></li>
+													<li><a href="~/css#"><i class="fa fa-rss"></i></a></li>
+													<li><a href="~/css#"><i class="fa fa-youtube-play"></i></a></li>
+													<li><a href="~/css#"><i class="fa fa-google-plus"></i></a></li>
+												</ul>
+											</div>
+										</div>
+										<!-- single-footer-end -->
+									</div>
+									<div class="col-lg-3 col-md-6 col-12">
+										<div class="single-footer">
+											<div class="footer-title">
+												<h4>Kategoriler</h4>
+											</div>
+											<div class="footer-menu">
+												<ul>
+													@foreach (var alt in alt1)
+													{
+														<li><a href="/Urun/Kategori/@alt.KategoriSeo">@alt.KategoriAdi</a></li>
+													}
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-6 col-12">
+										<div class="single-footer">
+											<div class="footer-title">
+												<h4>Kategoriler</h4>
+											</div>
+											<div class="footer-menu">
+												<ul>
+													@foreach (var alt in alt2)
+													{
+														<li><a href="/Urun/Kategori/@alt.KategoriSeo">@alt.KategoriAdi</a></li>
+													}
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3 col-md-6 col-12">
+										<div class="single-footer">
+											<div class="footer-title">
+												<h4>Kategoriler</h4>
+											</div>
+											<div class="footer-menu">
+												<ul>
+													@foreach (var alt in alt3)
+													{
+														<li><a href="/Urun/Kategori/@alt.KategoriSeo">@alt.KategoriAdi</a></li>
+													}
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- footer-top-area-end -->
+						<!-- footer-bottom-area-start -->
+						<div class="footer-bottom-area ptb-20">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-6 col-md-6  col-12">
+										<div class="copy-right">
+											<p>&copy; Legend 2023 Made With <i class="fa fa-heart text-danger mx-1"></i> by <a href="~/csshttps://hasthemes.com/" target="_blank" rel="noopener"> HasThemes</a></p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6  col-12">
+										<div class="payment-area">
+											<a href="~/css#"><img src="~/img/1.png" alt="payment" /></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- footer-bottom-area-end -->
+					</footer>
+					<!-- footer-area-end -->
+					<script src="~/js/vendor/jquery-3.6.0.min.js"></script>
+					<script src="~/js/vendor/modernizr-3.11.2.min.js"></script>
+					<script src="~/js/bootstrap.bundle.min.js"></script>
+					<script src="~/js/owl.carousel.min.js"></script>
+					<script src="~/js/jquery.meanmenu.js"></script>
+					<script src="~/js/jquery-ui.min.js"></script>
+					<script src="~/js/wow.min.js"></script>
+					<script src="~/js/chosen.jquery.min.js"></script>
+					<script src="~/js/jquery.nivo.slider.js"></script>
+					<script src="~/js/jquery.countdown.min.js"></script>
+					<script src="~/js/jquery.flexslider.js"></script>
+					<script src="~/js/jquery.counterup.min.js"></script>
+					<script src="~/js/waypoints.min.js"></script>
+					<script src="~/js/plugins.js"></script>
+					<script src="~/js/main.js"></script>
+					<script src="~/js/site.js"></script>
+
+					@RenderSection("Scripts", required: false)
+				</body>
+
+				</html>
+			}
+		}
+	}
+}
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Layer.Data.TblYorum>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TblUrun.UrunAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblUye.UyeMailAdresi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YorumIcerik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YorumTarihi)
+            </th>
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TblUrun.UrunAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TblUye.UyeMailAdresi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YorumIcerik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.YorumTarihi)
+                </td>
+                <td>
+                    @Html.ActionLink("Sil", "Sil", new { id = item.YorumId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

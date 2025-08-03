@@ -1,0 +1,132 @@
+﻿@model Layer.Data.TblUrun
+@{
+	ViewData["Title"] = "Detay";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+	<h1>Ürün Detay</h1>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.KategoriId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.KategoriId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.MarkaId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunAdi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunAdi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunKodu)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunKodu)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunResimUrl)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunResimUrl)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunSeo)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunSeo)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunTaglar)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunTaglar)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunFiyat)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunFiyat)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.UrunAciklama)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.UrunAciklama)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.TeknikOzellikler)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.TeknikOzellikler)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Stok)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Stok)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.EkleyenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.EkleyenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.EklenmeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.EklenmeTarihi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.Silik)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.Silik)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.SilenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.SilenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.SilmeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.SilmeTarihi)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.GuncelleyenUyeId)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.GuncelleyenUyeId)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.GuncellemeTarihi)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.GuncellemeTarihi)
+		</dd>
+	</dl>
+</div>
+<div>
+	@Html.ActionLink("Düzenle", "Duzenle", new { id = Model.UrunId }) |
+	<a href="/Urun">Listeye Dön</a>
+</div>
+
+

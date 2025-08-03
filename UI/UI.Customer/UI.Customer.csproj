@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="App.Config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.Config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Iyzipay" Version="2.1.67" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Layer\Layer.Business\Layer.Business\Layer.Business.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Data\Layer.Data.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Entities\Layer.Entities.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Enum\Layer.Enum.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Security\Layer.Security.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Iyzipay">
+      <HintPath>..\..\..\..\Users\TR\Downloads\iyzipay-dotnet-master\iyzipay-dotnet-master\Iyzipay\bin\Debug\net45\Iyzipay.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Layer.Data.TblYorum>
+@{
+    ViewData["Title"] = "Onay Bekleyen Yorumlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Onay Bekleyen Yorumlar</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Ürün</th>
+            <th>Kullanıcı</th>
+            <th>İçerik</th>
+            <th>Tarih</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var yorum in Model)
+        {
+            <tr>
+                <td>@yorum.TblUrun?.UrunAdi</td>
+                <td>@yorum.TblUye?.UyeMailAdresi</td>
+                <td>@yorum.YorumIcerik</td>
+                <td>@yorum.YorumTarihi.ToString("dd.MM.yyyy")</td>
+                <td>
+                    <button class="btn btn-success btn-sm" onclick="yorumOnayla(@yorum.YorumId)">✔</button>
+                    <a href="/Yorum/Sil/@yorum.YorumId" class="btn btn-danger btn-sm">✘</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script>
+        function yorumOnayla(id) {
+            fetch('/Yorum/Onayla/' + id, {
+                method: 'POST'
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.mesaj);
+                if (data.basarili) location.reload();
+            });
+        }
+       
+    </script>

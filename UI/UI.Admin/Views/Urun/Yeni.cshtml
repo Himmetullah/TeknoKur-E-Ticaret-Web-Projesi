@@ -1,0 +1,114 @@
+﻿@using Layer.Data;
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var kategoriler = ViewBag.Kategoriler as List<SelectListItem> ?? new List<SelectListItem>();
+    var markalar = ViewBag.Markalar as List<SelectListItem> ?? new List<SelectListItem>();
+
+}
+
+<h2>Ürün Ekleme formu</h2>
+<hr />
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("Yeni", "Urun", FormMethod.Post))
+        {
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunAdi" placeholder="Benzersiz Ürün Adı" name="UrunAdi">
+                    <label for="UrunAdi">Ürün Adı</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <select id="KategoriId" name="KategoriId" class="form-control">
+                        <option value="">-- Kategori Seçiniz --</option>
+                        @foreach (var kategori in kategoriler)
+                        {
+                            <option value="@kategori.Value">@kategori.Text</option>
+                        }
+                       
+                    </select>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <select id="MarkaId" name="MarkaId" class="form-control">
+                        <option value="">-- Marka Seçiniz --</option>
+                        @foreach (var marka in markalar)
+                        {
+                            <option value="@marka.Value">@marka.Text</option>
+						}
+	
+                    </select>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunKodu" placeholder="Benzersiz Ürün Kodu" name="UrunKodu">
+                    <label for="UrunKodu">Ürün Kodu</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunResimUrl" placeholder="Benzersiz Ürün Resim Url" name="UrunResimUrl">
+                    <label for="UrunResimUrl">Resim Url</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunTaglar" placeholder="Benzersiz Ürün Taglar" name="UrunTaglar">
+                    <label for="UrunTaglar">Ürün Taglar</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunFiyat" placeholder="Ürün Fiyat" name="UrunFiyat">
+                    <label for="UrunFiyat">Ürün Fiyatı</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="UrunAciklama" placeholder="Benzersiz Ürün Açıklama" name="UrunAciklama">
+                    <label for="UrunAciklama">Ürün Açıklama</label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="TeknikOzellikler" placeholder="Benzersiz Ürün Teknik Özellikler" name="TeknikOzellikler">
+                    <label for="TeknikOzellikler">Ürün Teknik Özellikler </label>
+                </div>
+            </div>
+            <div class="card-body demo-vertical-spacing demo-only-element">
+                <div class="form-floating form-floating-outline mb-6">
+                    <input type="text" class="form-control" id="Stok" placeholder="Benzersiz Stok Adedi" name="Stok">
+                    <label for="Stok">Stok Adedi</label>
+                </div>
+            </div>
+           
+            <div class="col-md-12">
+                <div class="d-flex align-items-center justify-content-md-end justify-content-center">
+                        <a href="/Urun">Ürün Listesine Git</a>
+                    <div class="add-new">
+                        <button class="btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+                            <i class="ri-add-line me-0 me-sm-1 d-inline-block d-sm-none"></i>
+                            <span class="d-none d-sm-inline-block"> Kaydet </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

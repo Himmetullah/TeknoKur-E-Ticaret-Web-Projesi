@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Layer.Data\Layer.Data.csproj" />
+    <ProjectReference Include="..\..\Layer.Entities\Layer.Entities.csproj" />
+    <ProjectReference Include="..\..\Layer.Enum\Layer.Enum.csproj" />
+    <ProjectReference Include="..\..\Layer.Security\Layer.Security.csproj" />
+  </ItemGroup>
+
+</Project>

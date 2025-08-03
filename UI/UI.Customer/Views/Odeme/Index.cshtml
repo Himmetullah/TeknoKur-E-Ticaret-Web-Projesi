@@ -1,0 +1,140 @@
+﻿@model UI.Customer.Entities.TCrediCart
+
+@{
+    ViewData["Title"] = "Ödeme";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    var urunler = ViewBag.SepetUrunler as List<dynamic>;
+    decimal toplam = ViewBag.ToplamFiyat ?? 0;
+}
+
+<style>
+    .odeme-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+    .odeme-form-kismi {
+        flex: 2;
+        min-width: 350px;
+    }
+
+    .siparis-ozet-kismi {
+        flex: 1;
+        min-width: 280px;
+        border: 1px solid #ddd;
+        padding: 20px;
+        height: fit-content;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+    }
+
+    .form-control {
+        border-radius: 6px;
+    }
+
+    .cvv-info {
+        position: relative;
+        display: inline-block;
+        margin-left: 5px;
+    }
+
+        .cvv-info .tooltip-text {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #333;
+            color: #fff;
+            padding: 5px 8px;
+            font-size: 12px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .cvv-info:hover .tooltip-text {
+            display: block;
+        }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .secure-checkbox {
+        margin-top: 10px;
+    }
+</style>
+
+<div class="breadcrumb-area mb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-content text-center">
+                    <div class="breadcrumb-title">
+                        <h3><a href="#">Kart Bilgileri ile Ödeme</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="odeme-container">
+        <!-- Sol taraf: Kart bilgileri formu -->
+        <div class="odeme-form-kismi">
+            <h4>Kart Bilgileri</h4>
+            <form asp-action="Index" method="post" class="mt-4">
+                <div class="form-group mb-3">
+                    <label class="form-label" asp-for="CardNumber">Kart Numarası</label>
+                    <input asp-for="CardNumber" class="form-control" placeholder="•••• •••• •••• ••••" />
+                    <span asp-validation-for="CardNumber" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="ExpireMonth">Ay</label>
+                        <select asp-for="ExpireMonth" class="form-control">
+                            @for (int i = 1; i <= 12; i++)
+                            {
+                                <option value="@i">@i.ToString("00")</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="ExpireYear">Yıl</label>
+                        <select asp-for="ExpireYear" class="form-control">
+                            @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" asp-for="Cvc">CVV</label>
+                        <input asp-for="Cvc" class="form-control" placeholder="123" />
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 mt-3">Ödemeyi Tamamla</button>
+            </form>
+            <br />
+        </div>
+
+        <!-- Sağ taraf: Sipariş Özeti -->
+        <div class="siparis-ozet-kismi">
+            <h5>Sipariş Özeti</h5>
+            @if (urunler != null && urunler.Any())
+            {
+                foreach (var urun in urunler)
+                {
+                    <p class="mb-1">@urun.urunAdi (@urun.adet adet) - @((urun.urunFiyat * urun.adet).ToString("C2"))</p>
+                }
+                <hr />
+            }
+            <p><strong>Toplam Tutar:</strong> @toplam.ToString("C2")</p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,76 @@
+﻿@model Layer.Data.VwUyeKisi
+@{
+    ViewData["Title"] = "Kişi Güncelle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <h2>Kişi Bilgileri Güncelle</h2>
+    <hr />
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Duzenle", "Uye", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.UyeId)
+
+            <div class="form-group mb-3">
+                <label for="UyeMailAdresi">E-Posta</label>
+                <input type="email" name="UyeMailAdresi" class="form-control" value="@Model.UyeMailAdresi" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="Sifre">Şifre</label>
+                <input type="password" name="Sifre" class="form-control" value="@Model.Sifre" required />
+            </div>
+
+            <div class="form-check mb-3">
+                <input type="checkbox" name="Admin" class="form-check-input" id="Admin" @(Model.Admin == true ? "checked" : "") />
+                <label for="Admin" class="form-check-label">Admin</label>
+            </div>
+
+            <hr />
+
+            <div class="form-group mb-3">
+                <label for="KisiAd">Ad</label>
+                <input type="text" name="KisiAd" class="form-control" value="@Model.KisiAd" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="KisiSoyad">Soyad</label>
+                <input type="text" name="KisiSoyad" class="form-control" value="@Model.KisiSoyad" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="KisiTc">T.C. Kimlik</label>
+                <input type="number" name="KisiTc" class="form-control" value="@Model.KisiTc" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="KisiDogumTarihi">Doğum Tarihi</label>
+                <input type="date" name="KisiDogumTarihi" class="form-control" value="@Model.KisiDogumTarihi?.ToString("yyyy-MM-dd")" required />
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="KisiCinsiyet">Cinsiyet</label>
+                <select name="KisiCinsiyet" class="form-control" required>
+                    <option value="">-- Cinsiyet Seçiniz --</option>
+                    <option value="Kadın" @(Model.KisiCinsiyet == "Kadın" ? "selected" : "")>Kadın</option>
+                    <option value="Erkek" @(Model.KisiCinsiyet == "Erkek" ? "selected" : "")>Erkek</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <a href="@Url.Action("Index", "Uye")" class="btn btn-secondary ms-2">İptal</a>
+        }
+    </div>
+</div>

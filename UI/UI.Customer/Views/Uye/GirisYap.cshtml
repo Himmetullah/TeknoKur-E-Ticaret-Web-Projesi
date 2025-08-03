@@ -1,0 +1,40 @@
+﻿@{
+	ViewData["Title"] = "GirisYap";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+@if (ViewBag.Mesaj != null)
+{
+	<div class="alert alert-success text-center">@ViewBag.Mesaj</div>
+}
+    
+<section class="login__section pt-60 pb-60">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-8 col-md-10">
+				<div class="login__wrap">
+					<div class="login-title text-center mb-30">
+						<h2>Giriş Yap</h2>
+					</div>
+
+						<form method="post" asp-controller="Uye" asp-action="GirisYap" class="login__form row justify-content-center">
+							<div class="col-md-8 mb-20">
+								<label>E-Mail</label>
+								<input type="email" class="form-control" name="Mail" placeholder="E-posta adresiniz" required />
+							</div>
+							<div class="col-md-8 mb-20">
+								<label>Şifre</label>
+								<input type="password" class="form-control" name="Sifre" placeholder="Şifrenizi giriniz" required />
+							</div>
+							<div class="text-center">
+								<button type="submit" class="btn btn-success">Giriş Yap</button>
+							</div>
+						</form>
+					<div class="login__footer text-center mt-20">
+						<p>Hesabınız yok mu? <a href="/Uye/KayitOl/"> Kayıt Olun</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

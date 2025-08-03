@@ -1,0 +1,253 @@
+﻿@model Layer.Data.TblUrun
+@{
+	ViewData["Title"] = "Detay";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+	var urun = ViewBag.Urun as Layer.Data.TblUrun;
+	var kategori = ViewBag.Kategori as Layer.Data.TblKategoriler;
+	var digerUrunler = ViewBag.DigerUrunler as List<Layer.Data.TblUrun>;
+}
+
+<!-- breadcrumb-area-start -->
+<div class="breadcrumb-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb-content text-center">
+					<div class="breadcrumb-title">
+						<h3><a href="product-details.html">@urun?.UrunAdi</a></h3>
+					</div>
+					<ul>
+						<li><a href="~/"><i class="fa fa-home"></i></a></li>
+						<li class="active"><a href="/Urun/Kategori/@kategori?.KategoriSeo/"><i class="fa fa-angle-right"></i>@kategori?.KategoriAdi</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb-area-end -->
+<!-- product-details-area-start -->
+<div class="product-details-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 col-md-5 col-12">
+				<div class="flexslider">
+					<ul class="slides">
+						<li data-thumb="@urun?.UrunResimUrl">
+							<img src="@urun?.UrunResimUrl" alt="@urun?.UrunAdi" />
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-7 col-md-7 col-12">
+				<div class="product-info-main">
+					<div class="page-title">
+						<h1>@urun?.UrunAdi</h1>
+					</div>
+					<div class="product_reference">
+						<p>Ürün Kodu :<span>@urun?.UrunKodu</span></p>
+					</div>
+					<div class="product_condition">
+						<p>Durum : <span>Yeni</span></p>
+					</div>
+					<div class="product-info-price">
+						<div class="price-final">
+							<span>@urun?.UrunFiyat.ToString("C2")<span class="tax">KDV Dahil</span></span>
+						</div>
+					</div>
+					<div class="short_description_block">
+						<p>@urun?.UrunAciklama</p>
+					</div>
+					<div class="product-add-form">
+						<form action="#">
+							<div class="quality-button">
+								<label>Adet</label>
+								<input class="qty" type="number" value="1" min="1" max="@urun?.Stok">
+							</div>
+						</form>
+					</div>
+					<div class="box-cart-bottom">
+						<div class="add_to_cart">
+							<a href="javascript:void(0)" class="sepete-ekle-btn" data-id="@urun.UrunId">Sepete Ekle</a>
+						</div>
+						<div class="add-to-links-2">
+							<ul>
+								<li>
+									<a href="javascript:void(0);" class="favori-ekle-kaldir" data-id="@urun?.UrunId">
+										<i class="fa fa-heart-o"></i>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="QuantityAvailable">
+						<span>@urun?.Stok Adet</span>
+						<a href="#">@(urun?.Stok > 0 ? "Stokta Var" : "Stokta Yok")</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- product-details-area-end -->
+<!-- more-info-area-start -->
+<div class="more-info-area pt-50">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<!-- tab-menu-start -->
+				<div class="tab-menu mb-40 text-center ">
+					<ul class="nav">
+						<li><a class="active" href="#More" data-bs-toggle="tab">Ürün Hakkında</a></li>
+						<li><a href="#Data" data-bs-toggle="tab">Yorumlar</a></li>
+					</ul>
+				</div>
+				<!-- tab-menu-end -->
+			</div>
+		</div>
+		<!-- tab-area-start -->
+		<div class="tab-content">
+			<div class="tab-pane active" id="More">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="rate">
+							<p>@urun?.TeknikOzellikler</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="Data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="yorum-alani">
+							<h4 class="mb-3">Yorumlar</h4>
+							<div id="yorumlarListesi" class="mb-4">
+							</div>
+							<hr />
+
+							<h4 class="mb-3">Yorumunuzu Yazın</h4>
+							<div class="yorum-formu">
+								<form id="yorumFormu">
+									<input type="hidden" id="urunId" value="@urun?.UrunId" />
+									<div class="form-group mb-3">
+										<label for="yorumIcerik" class="form-label">Yorumunuz:</label>
+										<textarea class="form-control" id="yorumIcerik" rows="5" required></textarea>
+									</div>
+									<button type="submit" class="btn btn-primary">Yorumu Gönder</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- tab-area-end -->
+		</div>
+	</div>
+	<!-- more-info-area-end -->
+	<!-- pos_new_product-area-start -->
+	<div class="pos_new_product ptb-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title mb-30">
+						<h2> Diğer Ürünler: </h2>
+					</div>
+				</div>
+			</div>
+			<div class="product-active-3 owl-carousel">
+				<!-- single-product-start -->
+				@if (digerUrunler != null && digerUrunler.Any())
+				{
+					foreach (var digerUrun in digerUrunler)
+					{
+						<div class="single-product">
+							<div class="product-img">
+								<a href="/@digerUrun.UrunSeo">
+									<img src="@digerUrun.UrunResimUrl" alt="@digerUrun.UrunAdi" class="first" />
+								</a>
+							</div>
+							<div class="product-content">
+								<h3><a href="/Urun/Detay/@digerUrun.UrunSeo" style="height: 40px; overflow: hidden;">@digerUrun.UrunAdi</a></h3>
+								<div class="product-price">
+									<ul>
+										<li class="new-price">@digerUrun.UrunFiyat.ToString("C2")</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+					}
+				}
+				<!-- single-product-end -->
+			</div>
+		</div>
+	</div>
+	<!-- pos_new_product-area-end -->
+@section scripts {
+		<script>
+			$(document).ready(function () {
+				$('a[href="#Data"]').on('shown.bs.tab', function (e) {
+					yukleYorumlar(@urun?.UrunId);
+				});
+
+				$('#yorumFormu').submit(function (e) {
+					e.preventDefault();
+
+					var urunId = $('#urunId').val();
+					var yorumIcerik = $('#yorumIcerik').val();
+
+					$.ajax({
+						url: '/Urun/YorumYap',
+						type: 'POST',
+						data: { urunId: urunId, yorumIcerik: yorumIcerik },
+						success: function (response) {
+							alert(response.mesaj);
+							if (response.basarili) {
+								$('#yorumIcerik').val(''); 
+								yukleYorumlar(urunId);
+							}
+						},
+						error: function () {
+							alert('Bir hata oluştu, lütfen tekrar deneyin.');
+						}
+					});
+				});
+			});
+
+			function yukleYorumlar(urunId) {
+				$.ajax({
+					url: '/Urun/YorumlariGetir',
+					type: 'GET',
+					data: { urunId: urunId },
+					success: function (response) {
+						var yorumListesi = $('#yorumlarListesi');
+						yorumListesi.empty(); 
+
+						if (response.basarili && response.yorumlar.length > 0) {
+							$.each(response.yorumlar, function (index, yorum) {
+								var tarih = new Date(yorum.yorumTarihi);
+								var tarihMetni = tarih.toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+								var yorumHtml = `
+									<div class="card mb-3">
+										<div class="card-body">
+											<p class="card-text">${yorum.yorumIcerik}</p>
+											<small class="text-muted">${tarihMetni}</small>
+										</div>
+									</div>
+								`;
+								yorumListesi.append(yorumHtml);
+							});
+						} else {
+							yorumListesi.append('<div class="alert alert-info">Bu ürün için henüz onaylanmış yorum bulunmamaktadır.</div>');
+						}
+					},
+					error: function () {
+						$('#yorumlarListesi').append('<div class="alert alert-danger">Yorumlar yüklenirken bir sorun oluştu.</div>');
+					}
+				});
+			}
+		</script>
+}
+

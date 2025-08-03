@@ -1,0 +1,1438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DbTeknoKurModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblFavori">
+          <Key>
+            <PropertyRef Name="FavoriId" />
+          </Key>
+          <Property Name="FavoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="UrunId" Type="int" Nullable="false" />
+          <Property Name="EklenmeTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Silik" Type="bit" />
+        </EntityType>
+        <EntityType Name="TblKategoriler">
+          <Key>
+            <PropertyRef Name="KategoriId" />
+          </Key>
+          <Property Name="KategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="KategoriSeo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UstKategoriId" Type="int" />
+          <Property Name="EkleyenUyeId" Type="int" />
+          <Property Name="EklenmeTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilenUyeId" Type="int" />
+          <Property Name="SilmeTarihi" Type="datetime" />
+          <Property Name="GuncelleyenUyeId" Type="int" />
+          <Property Name="GuncellemeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblKisiAdres">
+          <Key>
+            <PropertyRef Name="AdresId" />
+          </Key>
+          <Property Name="AdresId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KisiId" Type="int" Nullable="false" />
+          <Property Name="AdresBaslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresUlke" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="AdresIl" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresIlce" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Varsayilan" Type="bit" />
+          <Property Name="FaturaAdresi" Type="bit" />
+          <Property Name="EkleyenUyeId" Type="int" />
+          <Property Name="EklenmeTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilenUyeId" Type="int" />
+          <Property Name="SilmeTarihi" Type="datetime" />
+          <Property Name="GuncelleyenUyeId" Type="int" />
+          <Property Name="GuncellemeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblKisiTelefon">
+          <Key>
+            <PropertyRef Name="TelefonId" />
+          </Key>
+          <Property Name="TelefonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KisiId" Type="int" Nullable="false" />
+          <Property Name="TelefonNumarasi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Varsayilan" Type="bit" />
+          <Property Name="EkleyenUyeId" Type="int" />
+          <Property Name="EklenmeTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilenUyeId" Type="int" />
+          <Property Name="SilmeTarihi" Type="datetime" />
+          <Property Name="GuncelleyenUyeId" Type="int" />
+          <Property Name="GuncellemeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblMarka">
+          <Key>
+            <PropertyRef Name="MarkaId" />
+          </Key>
+          <Property Name="MarkaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarkaAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MarkaSeo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EkleyenUyeId" Type="int" />
+          <Property Name="EklenmeTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilenUyeId" Type="int" />
+          <Property Name="SilmeTarihi" Type="datetime" />
+          <Property Name="GuncelleyenUyeId" Type="int" />
+          <Property Name="GuncellemeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblSepet">
+          <Key>
+            <PropertyRef Name="SepetId" />
+          </Key>
+          <Property Name="SepetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="UrunId" Type="int" Nullable="false" />
+          <Property Name="Adet" Type="int" Nullable="false" />
+          <Property Name="ToplamFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="EklenmeTarihi" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblSiparis">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+          </Key>
+          <Property Name="SiparisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="AdresId" Type="int" />
+          <Property Name="SiparisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="ToplamTutar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OdemeDurumu" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblSiparisDetay">
+          <Key>
+            <PropertyRef Name="SiparisDetayId" />
+          </Key>
+          <Property Name="SiparisDetayId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiparisId" Type="int" Nullable="false" />
+          <Property Name="UrunId" Type="int" Nullable="false" />
+          <Property Name="Adet" Type="int" Nullable="false" />
+          <Property Name="UrunFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ToplamTutar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblSiteAyarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiteBaslik" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="SiteAcik" Type="bit" Nullable="false" />
+          <Property Name="MetaTaglari" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AnahtarKelimeler" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StandartHizmetBedeli" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblUrun">
+          <Key>
+            <PropertyRef Name="UrunId" />
+          </Key>
+          <Property Name="UrunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriId" Type="int" Nullable="false" />
+          <Property Name="MarkaId" Type="int" Nullable="false" />
+          <Property Name="UrunAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunKodu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunResimUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunSeo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunTaglar" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UrunAciklama" Type="ntext" Nullable="false" />
+          <Property Name="TeknikOzellikler" Type="ntext" Nullable="false" />
+          <Property Name="Stok" Type="int" Nullable="false" />
+          <Property Name="EkleyenUyeId" Type="int" />
+          <Property Name="EklenmeTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilenUyeId" Type="int" />
+          <Property Name="SilmeTarihi" Type="datetime" />
+          <Property Name="GuncelleyenUyeId" Type="int" />
+          <Property Name="GuncellemeTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TblUye">
+          <Key>
+            <PropertyRef Name="UyeId" />
+          </Key>
+          <Property Name="UyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeMailAdresi" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Sifre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="UyeKayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Donuk" Type="bit" />
+          <Property Name="DondurmaTarihi" Type="datetime" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="SilinmeTarihi" Type="datetime" />
+          <Property Name="SifremiUnuttum" Type="bit" />
+          <Property Name="SifirlamaKodu" Type="nvarchar" MaxLength="100" />
+          <Property Name="Admin" Type="bit" />
+        </EntityType>
+        <EntityType Name="TblUyeKisi">
+          <Key>
+            <PropertyRef Name="KisiId" />
+          </Key>
+          <Property Name="KisiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="KisiAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KisiSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KisiTc" Type="bigint" Nullable="false" />
+          <Property Name="KisiDogumTarihi" Type="date" />
+          <Property Name="KisiCinsiyet" Type="nvarchar" MaxLength="5" />
+          <Property Name="Silik" Type="bit" />
+        </EntityType>
+        <EntityType Name="TblYorum">
+          <Key>
+            <PropertyRef Name="YorumId" />
+          </Key>
+          <Property Name="YorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunId" Type="int" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="YorumIcerik" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="YorumTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Onaylandi" Type="bit" Nullable="false" />
+          <Property Name="Silik" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTeknoKur.dbo.VwKisiAdresTelefon' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VwKisiAdresTelefon">
+          <Key>
+            <PropertyRef Name="KisiId" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="AdresBaslik" />
+            <PropertyRef Name="AdresUlke" />
+            <PropertyRef Name="AdresIl" />
+            <PropertyRef Name="AdresIlce" />
+            <PropertyRef Name="Adres" />
+            <PropertyRef Name="TelefonNumarasi" />
+            <PropertyRef Name="AdresId" />
+            <PropertyRef Name="TelefonId" />
+          </Key>
+          <Property Name="KisiId" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="AdresBaslik" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresUlke" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="AdresIl" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdresIlce" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TelefonNumarasi" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="AdresId" Type="int" Nullable="false" />
+          <Property Name="TelefonId" Type="int" Nullable="false" />
+          <Property Name="FaturaAdresi" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTeknoKur.dbo.VwSiparisUrun' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VwSiparisUrun">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+            <PropertyRef Name="UyeId" />
+            <PropertyRef Name="SiparisTarihi" />
+            <PropertyRef Name="ToplamTutar" />
+            <PropertyRef Name="OdemeDurumu" />
+            <PropertyRef Name="UrunId" />
+            <PropertyRef Name="KategoriId" />
+            <PropertyRef Name="MarkaId" />
+            <PropertyRef Name="UrunAdi" />
+            <PropertyRef Name="UrunKodu" />
+            <PropertyRef Name="UrunResimUrl" />
+            <PropertyRef Name="UrunFiyat" />
+            <PropertyRef Name="UrunAciklama" />
+            <PropertyRef Name="TeknikOzellikler" />
+            <PropertyRef Name="Stok" />
+          </Key>
+          <Property Name="SiparisId" Type="int" Nullable="false" />
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="AdresId" Type="int" />
+          <Property Name="SiparisTarihi" Type="datetime" Nullable="false" />
+          <Property Name="ToplamTutar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OdemeDurumu" Type="bit" Nullable="false" />
+          <Property Name="UrunId" Type="int" Nullable="false" />
+          <Property Name="KategoriId" Type="int" Nullable="false" />
+          <Property Name="MarkaId" Type="int" Nullable="false" />
+          <Property Name="UrunAdi" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunKodu" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunResimUrl" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UrunFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UrunAciklama" Type="ntext" Nullable="false" />
+          <Property Name="TeknikOzellikler" Type="ntext" Nullable="false" />
+          <Property Name="Stok" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DbTeknoKur.dbo.VwUyeKisi' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VwUyeKisi">
+          <Key>
+            <PropertyRef Name="UyeId" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="UyeMailAdresi" />
+            <PropertyRef Name="Sifre" />
+            <PropertyRef Name="KisiAd" />
+            <PropertyRef Name="KisiSoyad" />
+            <PropertyRef Name="KisiTc" />
+            <PropertyRef Name="UyeKayitTarihi" />
+          </Key>
+          <Property Name="UyeId" Type="int" Nullable="false" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="UyeMailAdresi" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Sifre" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Donuk" Type="bit" />
+          <Property Name="DondurmaTarihi" Type="datetime" />
+          <Property Name="KisiAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KisiSoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KisiTc" Type="bigint" Nullable="false" />
+          <Property Name="KisiDogumTarihi" Type="date" />
+          <Property Name="KisiCinsiyet" Type="nvarchar" MaxLength="5" />
+          <Property Name="UyeKayitTarihi" Type="datetime" Nullable="false" />
+          <Property Name="Admin" Type="bit" />
+          <Property Name="Silik" Type="bit" />
+          <Property Name="Expr2" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Sepetler_Urunler">
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="1" />
+          <End Role="TblSepet" Type="Self.TblSepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblSepet">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Siparis">
+          <End Role="TblSiparis" Type="Self.TblSiparis" Multiplicity="1" />
+          <End Role="TblSiparisDetay" Type="Self.TblSiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSiparis">
+              <PropertyRef Name="SiparisId" />
+            </Principal>
+            <Dependent Role="TblSiparisDetay">
+              <PropertyRef Name="SiparisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Urun">
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="1" />
+          <End Role="TblSiparisDetay" Type="Self.TblSiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblSiparisDetay">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFavori_TblUrun">
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblFavori" Type="Self.TblFavori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblFavori">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFavori_TblUye">
+          <End Role="TblUye" Type="Self.TblUye" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblFavori" Type="Self.TblFavori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblFavori">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblKisiAdres_TblUyeKisi">
+          <End Role="TblUyeKisi" Type="Self.TblUyeKisi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblKisiAdres" Type="Self.TblKisiAdres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUyeKisi">
+              <PropertyRef Name="KisiId" />
+            </Principal>
+            <Dependent Role="TblKisiAdres">
+              <PropertyRef Name="KisiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblKisiTelefon_TblUyeKisi">
+          <End Role="TblUyeKisi" Type="Self.TblUyeKisi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblKisiTelefon" Type="Self.TblKisiTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUyeKisi">
+              <PropertyRef Name="KisiId" />
+            </Principal>
+            <Dependent Role="TblKisiTelefon">
+              <PropertyRef Name="KisiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSiparis_Adres">
+          <End Role="TblKisiAdres" Type="Self.TblKisiAdres" Multiplicity="0..1" />
+          <End Role="TblSiparis" Type="Self.TblSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKisiAdres">
+              <PropertyRef Name="AdresId" />
+            </Principal>
+            <Dependent Role="TblSiparis">
+              <PropertyRef Name="AdresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSiparis_Uye">
+          <End Role="TblUye" Type="Self.TblUye" Multiplicity="1" />
+          <End Role="TblSiparis" Type="Self.TblSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblSiparis">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblUyeKisi_TblUye">
+          <End Role="TblUye" Type="Self.TblUye" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TblUyeKisi" Type="Self.TblUyeKisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblUyeKisi">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="TblKategoriler" Type="Self.TblKategoriler" Multiplicity="1" />
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKategoriler">
+              <PropertyRef Name="KategoriId" />
+            </Principal>
+            <Dependent Role="TblUrun">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Markalar">
+          <End Role="TblMarka" Type="Self.TblMarka" Multiplicity="1" />
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMarka">
+              <PropertyRef Name="MarkaId" />
+            </Principal>
+            <Dependent Role="TblUrun">
+              <PropertyRef Name="MarkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorum_Uye">
+          <End Role="TblUye" Type="Self.TblUye" Multiplicity="1" />
+          <End Role="TblYorum" Type="Self.TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorumlar_Urunler">
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="1" />
+          <End Role="TblYorum" Type="Self.TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTeknoKurModelStoreContainer">
+          <EntitySet Name="TblFavori" EntityType="Self.TblFavori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblKategoriler" EntityType="Self.TblKategoriler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblKisiAdres" EntityType="Self.TblKisiAdres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblKisiTelefon" EntityType="Self.TblKisiTelefon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblMarka" EntityType="Self.TblMarka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSepet" EntityType="Self.TblSepet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSiparis" EntityType="Self.TblSiparis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSiparisDetay" EntityType="Self.TblSiparisDetay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblSiteAyarlar" EntityType="Self.TblSiteAyarlar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUrun" EntityType="Self.TblUrun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUye" EntityType="Self.TblUye" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblUyeKisi" EntityType="Self.TblUyeKisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblYorum" EntityType="Self.TblYorum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VwKisiAdresTelefon" EntityType="Self.VwKisiAdresTelefon" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VwKisiAdresTelefon].[KisiId] AS [KisiId], 
+    [VwKisiAdresTelefon].[Expr1] AS [Expr1], 
+    [VwKisiAdresTelefon].[AdresBaslik] AS [AdresBaslik], 
+    [VwKisiAdresTelefon].[AdresUlke] AS [AdresUlke], 
+    [VwKisiAdresTelefon].[AdresIl] AS [AdresIl], 
+    [VwKisiAdresTelefon].[AdresIlce] AS [AdresIlce], 
+    [VwKisiAdresTelefon].[Adres] AS [Adres], 
+    [VwKisiAdresTelefon].[TelefonNumarasi] AS [TelefonNumarasi], 
+    [VwKisiAdresTelefon].[AdresId] AS [AdresId], 
+    [VwKisiAdresTelefon].[TelefonId] AS [TelefonId], 
+    [VwKisiAdresTelefon].[FaturaAdresi] AS [FaturaAdresi]
+    FROM [dbo].[VwKisiAdresTelefon] AS [VwKisiAdresTelefon]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VwSiparisUrun" EntityType="Self.VwSiparisUrun" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VwSiparisUrun].[SiparisId] AS [SiparisId], 
+    [VwSiparisUrun].[UyeId] AS [UyeId], 
+    [VwSiparisUrun].[AdresId] AS [AdresId], 
+    [VwSiparisUrun].[SiparisTarihi] AS [SiparisTarihi], 
+    [VwSiparisUrun].[ToplamTutar] AS [ToplamTutar], 
+    [VwSiparisUrun].[OdemeDurumu] AS [OdemeDurumu], 
+    [VwSiparisUrun].[UrunId] AS [UrunId], 
+    [VwSiparisUrun].[KategoriId] AS [KategoriId], 
+    [VwSiparisUrun].[MarkaId] AS [MarkaId], 
+    [VwSiparisUrun].[UrunAdi] AS [UrunAdi], 
+    [VwSiparisUrun].[UrunKodu] AS [UrunKodu], 
+    [VwSiparisUrun].[UrunResimUrl] AS [UrunResimUrl], 
+    [VwSiparisUrun].[UrunFiyat] AS [UrunFiyat], 
+    [VwSiparisUrun].[UrunAciklama] AS [UrunAciklama], 
+    [VwSiparisUrun].[TeknikOzellikler] AS [TeknikOzellikler], 
+    [VwSiparisUrun].[Stok] AS [Stok]
+    FROM [dbo].[VwSiparisUrun] AS [VwSiparisUrun]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VwUyeKisi" EntityType="Self.VwUyeKisi" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VwUyeKisi].[UyeId] AS [UyeId], 
+    [VwUyeKisi].[Expr1] AS [Expr1], 
+    [VwUyeKisi].[UyeMailAdresi] AS [UyeMailAdresi], 
+    [VwUyeKisi].[Sifre] AS [Sifre], 
+    [VwUyeKisi].[Donuk] AS [Donuk], 
+    [VwUyeKisi].[DondurmaTarihi] AS [DondurmaTarihi], 
+    [VwUyeKisi].[KisiAd] AS [KisiAd], 
+    [VwUyeKisi].[KisiSoyad] AS [KisiSoyad], 
+    [VwUyeKisi].[KisiTc] AS [KisiTc], 
+    [VwUyeKisi].[KisiDogumTarihi] AS [KisiDogumTarihi], 
+    [VwUyeKisi].[KisiCinsiyet] AS [KisiCinsiyet], 
+    [VwUyeKisi].[UyeKayitTarihi] AS [UyeKayitTarihi], 
+    [VwUyeKisi].[Admin] AS [Admin], 
+    [VwUyeKisi].[Silik] AS [Silik], 
+    [VwUyeKisi].[Expr2] AS [Expr2]
+    FROM [dbo].[VwUyeKisi] AS [VwUyeKisi]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Sepetler_Urunler" Association="Self.FK_Sepetler_Urunler">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblSepet" EntitySet="TblSepet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Siparis" Association="Self.FK_SiparisDetay_Siparis">
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+            <End Role="TblSiparisDetay" EntitySet="TblSiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Urun" Association="Self.FK_SiparisDetay_Urun">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblSiparisDetay" EntitySet="TblSiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFavori_TblUrun" Association="Self.FK_TblFavori_TblUrun">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblFavori" EntitySet="TblFavori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFavori_TblUye" Association="Self.FK_TblFavori_TblUye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblFavori" EntitySet="TblFavori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblKisiAdres_TblUyeKisi" Association="Self.FK_TblKisiAdres_TblUyeKisi">
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+            <End Role="TblKisiAdres" EntitySet="TblKisiAdres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblKisiTelefon_TblUyeKisi" Association="Self.FK_TblKisiTelefon_TblUyeKisi">
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+            <End Role="TblKisiTelefon" EntitySet="TblKisiTelefon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSiparis_Adres" Association="Self.FK_TblSiparis_Adres">
+            <End Role="TblKisiAdres" EntitySet="TblKisiAdres" />
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSiparis_Uye" Association="Self.FK_TblSiparis_Uye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblUyeKisi_TblUye" Association="Self.FK_TblUyeKisi_TblUye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="TblKategoriler" EntitySet="TblKategoriler" />
+            <End Role="TblUrun" EntitySet="TblUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Markalar" Association="Self.FK_Urunler_Markalar">
+            <End Role="TblMarka" EntitySet="TblMarka" />
+            <End Role="TblUrun" EntitySet="TblUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorum_Uye" Association="Self.FK_Yorum_Uye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorumlar_Urunler" Association="Self.FK_Yorumlar_Urunler">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTeknoKurModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblKategoriler">
+          <Key>
+            <PropertyRef Name="KategoriId" />
+          </Key>
+          <Property Name="KategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="KategoriSeo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EkleyenUyeId" Type="Int32" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilenUyeId" Type="Int32" />
+          <Property Name="SilmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="GuncelleyenUyeId" Type="Int32" />
+          <Property Name="GuncellemeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblUrun" Relationship="Self.FK_Urunler_Kategoriler" FromRole="TblKategoriler" ToRole="TblUrun" />
+          <Property Name="UstKategoriId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TblMarka">
+          <Key>
+            <PropertyRef Name="MarkaId" />
+          </Key>
+          <Property Name="MarkaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarkaAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MarkaSeo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EkleyenUyeId" Type="Int32" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilenUyeId" Type="Int32" />
+          <Property Name="SilmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="GuncelleyenUyeId" Type="Int32" />
+          <Property Name="GuncellemeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblUrun" Relationship="Self.FK_Urunler_Markalar" FromRole="TblMarka" ToRole="TblUrun" />
+        </EntityType>
+        <EntityType Name="TblUrun">
+          <Key>
+            <PropertyRef Name="UrunId" />
+          </Key>
+          <Property Name="UrunId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriId" Type="Int32" Nullable="false" />
+          <Property Name="MarkaId" Type="Int32" Nullable="false" />
+          <Property Name="UrunAdi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrunKodu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrunResimUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrunSeo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrunTaglar" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UrunFiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UrunAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TeknikOzellikler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stok" Type="Int32" Nullable="false" />
+          <Property Name="EkleyenUyeId" Type="Int32" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilenUyeId" Type="Int32" />
+          <Property Name="SilmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="GuncelleyenUyeId" Type="Int32" />
+          <Property Name="GuncellemeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblKategoriler" Relationship="Self.FK_Urunler_Kategoriler" FromRole="TblUrun" ToRole="TblKategoriler" />
+          <NavigationProperty Name="TblMarka" Relationship="Self.FK_Urunler_Markalar" FromRole="TblUrun" ToRole="TblMarka" />
+          <NavigationProperty Name="TblFavori" Relationship="DbTeknoKurModel.FK_TblFavori_TblUrun" FromRole="TblUrun" ToRole="TblFavori" />
+          <NavigationProperty Name="TblSepet" Relationship="DbTeknoKurModel.FK_Sepetler_Urunler" FromRole="TblUrun" ToRole="TblSepet" />
+          <NavigationProperty Name="TblSiparisDetay" Relationship="DbTeknoKurModel.FK_SiparisDetay_Urun" FromRole="TblUrun" ToRole="TblSiparisDetay" />
+          <NavigationProperty Name="TblYorum" Relationship="DbTeknoKurModel.FK_Yorumlar_Urunler" FromRole="TblUrun" ToRole="TblYorum" />
+        </EntityType>
+        <Association Name="FK_Urunler_Kategoriler">
+          <End Role="TblKategoriler" Type="Self.TblKategoriler" Multiplicity="1" />
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKategoriler">
+              <PropertyRef Name="KategoriId" />
+            </Principal>
+            <Dependent Role="TblUrun">
+              <PropertyRef Name="KategoriId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urunler_Markalar">
+          <End Role="TblMarka" Type="Self.TblMarka" Multiplicity="1" />
+          <End Role="TblUrun" Type="Self.TblUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMarka">
+              <PropertyRef Name="MarkaId" />
+            </Principal>
+            <Dependent Role="TblUrun">
+              <PropertyRef Name="MarkaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTeknoKurEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblKategoriler" EntityType="Self.TblKategoriler" />
+          <EntitySet Name="TblMarka" EntityType="Self.TblMarka" />
+          <EntitySet Name="TblUrun" EntityType="Self.TblUrun" />
+          <AssociationSet Name="FK_Urunler_Kategoriler" Association="Self.FK_Urunler_Kategoriler">
+            <End Role="TblKategoriler" EntitySet="TblKategoriler" />
+            <End Role="TblUrun" EntitySet="TblUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urunler_Markalar" Association="Self.FK_Urunler_Markalar">
+            <End Role="TblMarka" EntitySet="TblMarka" />
+            <End Role="TblUrun" EntitySet="TblUrun" />
+          </AssociationSet>
+          <EntitySet Name="TblUyeKisi" EntityType="DbTeknoKurModel.TblUyeKisi" />
+          <EntitySet Name="TblUye" EntityType="DbTeknoKurModel.TblUye" />
+          <AssociationSet Name="FK_TblUyeKisi_TblUye" Association="DbTeknoKurModel.FK_TblUyeKisi_TblUye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+          </AssociationSet>
+          <EntitySet Name="TblKisiAdres" EntityType="DbTeknoKurModel.TblKisiAdres" />
+          <EntitySet Name="TblKisiTelefon" EntityType="DbTeknoKurModel.TblKisiTelefon" />
+          <AssociationSet Name="FK_TblKisiAdres_TblUyeKisi" Association="DbTeknoKurModel.FK_TblKisiAdres_TblUyeKisi">
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+            <End Role="TblKisiAdres" EntitySet="TblKisiAdres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblKisiTelefon_TblUyeKisi" Association="DbTeknoKurModel.FK_TblKisiTelefon_TblUyeKisi">
+            <End Role="TblUyeKisi" EntitySet="TblUyeKisi" />
+            <End Role="TblKisiTelefon" EntitySet="TblKisiTelefon" />
+          </AssociationSet>
+          <EntitySet Name="TblFavori" EntityType="DbTeknoKurModel.TblFavori" />
+          <EntitySet Name="VwKisiAdresTelefon" EntityType="DbTeknoKurModel.VwKisiAdresTelefon" />
+          <AssociationSet Name="FK_TblFavori_TblUrun" Association="DbTeknoKurModel.FK_TblFavori_TblUrun">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblFavori" EntitySet="TblFavori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblFavori_TblUye" Association="DbTeknoKurModel.FK_TblFavori_TblUye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblFavori" EntitySet="TblFavori" />
+          </AssociationSet>
+          <EntitySet Name="TblSepet" EntityType="DbTeknoKurModel.TblSepet" />
+          <AssociationSet Name="FK_Sepetler_Urunler" Association="DbTeknoKurModel.FK_Sepetler_Urunler">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblSepet" EntitySet="TblSepet" />
+          </AssociationSet>
+          <EntitySet Name="TblSiteAyarlar" EntityType="DbTeknoKurModel.TblSiteAyarlar" />
+          <EntitySet Name="TblSiparis" EntityType="DbTeknoKurModel.TblSiparis" />
+          <EntitySet Name="TblSiparisDetay" EntityType="DbTeknoKurModel.TblSiparisDetay" />
+          <AssociationSet Name="FK_SiparisDetay_Siparis" Association="DbTeknoKurModel.FK_SiparisDetay_Siparis">
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+            <End Role="TblSiparisDetay" EntitySet="TblSiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSiparis_Uye" Association="DbTeknoKurModel.FK_TblSiparis_Uye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisDetay_Urun" Association="DbTeknoKurModel.FK_SiparisDetay_Urun">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblSiparisDetay" EntitySet="TblSiparisDetay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblSiparis_Adres" Association="DbTeknoKurModel.FK_TblSiparis_Adres">
+            <End Role="TblKisiAdres" EntitySet="TblKisiAdres" />
+            <End Role="TblSiparis" EntitySet="TblSiparis" />
+          </AssociationSet>
+          <EntitySet Name="VwSiparisUrun" EntityType="DbTeknoKurModel.VwSiparisUrun" />
+          <EntitySet Name="TblYorum" EntityType="DbTeknoKurModel.TblYorum" />
+          <AssociationSet Name="FK_Yorumlar_Urunler" Association="DbTeknoKurModel.FK_Yorumlar_Urunler">
+            <End Role="TblUrun" EntitySet="TblUrun" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorum_Uye" Association="DbTeknoKurModel.FK_Yorum_Uye">
+            <End Role="TblUye" EntitySet="TblUye" />
+            <End Role="TblYorum" EntitySet="TblYorum" />
+          </AssociationSet>
+          <EntitySet Name="VwUyeKisi" EntityType="DbTeknoKurModel.VwUyeKisi" />
+          </EntityContainer>
+        <EntityType Name="TblUyeKisi">
+          <Key>
+            <PropertyRef Name="KisiId" />
+          </Key>
+          <Property Name="KisiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="KisiAd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KisiSoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KisiTc" Type="Int64" Nullable="false" />
+          <Property Name="KisiDogumTarihi" Type="DateTime" Precision="0" />
+          <Property Name="KisiCinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Silik" Type="Boolean" />
+          <NavigationProperty Name="TblUye" Relationship="DbTeknoKurModel.FK_TblUyeKisi_TblUye" FromRole="TblUyeKisi" ToRole="TblUye" />
+          <NavigationProperty Name="TblKisiAdres" Relationship="DbTeknoKurModel.FK_TblKisiAdres_TblUyeKisi" FromRole="TblUyeKisi" ToRole="TblKisiAdres" />
+          <NavigationProperty Name="TblKisiTelefon" Relationship="DbTeknoKurModel.FK_TblKisiTelefon_TblUyeKisi" FromRole="TblUyeKisi" ToRole="TblKisiTelefon" />
+        </EntityType>
+        <EntityType Name="TblUye">
+          <Key>
+            <PropertyRef Name="UyeId" />
+          </Key>
+          <Property Name="UyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeMailAdresi" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="UyeKayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Donuk" Type="Boolean" />
+          <Property Name="DondurmaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilinmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="SifremiUnuttum" Type="Boolean" />
+          <Property Name="SifirlamaKodu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Admin" Type="Boolean" />
+          <NavigationProperty Name="TblUyeKisi" Relationship="DbTeknoKurModel.FK_TblUyeKisi_TblUye" FromRole="TblUye" ToRole="TblUyeKisi" />
+          <NavigationProperty Name="TblFavori" Relationship="DbTeknoKurModel.FK_TblFavori_TblUye" FromRole="TblUye" ToRole="TblFavori" />
+          <NavigationProperty Name="TblSiparis" Relationship="DbTeknoKurModel.FK_TblSiparis_Uye" FromRole="TblUye" ToRole="TblSiparis" />
+          <NavigationProperty Name="TblYorum" Relationship="DbTeknoKurModel.FK_Yorum_Uye" FromRole="TblUye" ToRole="TblYorum" />
+        </EntityType>
+        <Association Name="FK_TblUyeKisi_TblUye">
+          <End Type="DbTeknoKurModel.TblUye" Role="TblUye" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTeknoKurModel.TblUyeKisi" Role="TblUyeKisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblUyeKisi">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblKisiAdres">
+          <Key>
+            <PropertyRef Name="AdresId" />
+          </Key>
+          <Property Name="AdresId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KisiId" Type="Int32" Nullable="false" />
+          <Property Name="AdresBaslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdresUlke" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="AdresIl" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdresIlce" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Varsayilan" Type="Boolean" />
+          <Property Name="FaturaAdresi" Type="Boolean" />
+          <Property Name="EkleyenUyeId" Type="Int32" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilenUyeId" Type="Int32" />
+          <Property Name="SilmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="GuncelleyenUyeId" Type="Int32" />
+          <Property Name="GuncellemeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblUyeKisi" Relationship="DbTeknoKurModel.FK_TblKisiAdres_TblUyeKisi" FromRole="TblKisiAdres" ToRole="TblUyeKisi" />
+          <NavigationProperty Name="TblSiparis" Relationship="DbTeknoKurModel.FK_TblSiparis_Adres" FromRole="TblKisiAdres" ToRole="TblSiparis" />
+        </EntityType>
+        <EntityType Name="TblKisiTelefon">
+          <Key>
+            <PropertyRef Name="TelefonId" />
+          </Key>
+          <Property Name="TelefonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KisiId" Type="Int32" Nullable="false" />
+          <Property Name="TelefonNumarasi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Varsayilan" Type="Boolean" />
+          <Property Name="EkleyenUyeId" Type="Int32" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="SilenUyeId" Type="Int32" />
+          <Property Name="SilmeTarihi" Type="DateTime" Precision="3" />
+          <Property Name="GuncelleyenUyeId" Type="Int32" />
+          <Property Name="GuncellemeTarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TblUyeKisi" Relationship="DbTeknoKurModel.FK_TblKisiTelefon_TblUyeKisi" FromRole="TblKisiTelefon" ToRole="TblUyeKisi" />
+        </EntityType>
+        <Association Name="FK_TblKisiAdres_TblUyeKisi">
+          <End Type="DbTeknoKurModel.TblUyeKisi" Role="TblUyeKisi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTeknoKurModel.TblKisiAdres" Role="TblKisiAdres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUyeKisi">
+              <PropertyRef Name="KisiId" />
+            </Principal>
+            <Dependent Role="TblKisiAdres">
+              <PropertyRef Name="KisiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblKisiTelefon_TblUyeKisi">
+          <End Type="DbTeknoKurModel.TblUyeKisi" Role="TblUyeKisi" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTeknoKurModel.TblKisiTelefon" Role="TblKisiTelefon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUyeKisi">
+              <PropertyRef Name="KisiId" />
+            </Principal>
+            <Dependent Role="TblKisiTelefon">
+              <PropertyRef Name="KisiId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblFavori">
+          <Key>
+            <PropertyRef Name="FavoriId" />
+          </Key>
+          <Property Name="FavoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="UrunId" Type="Int32" Nullable="false" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Silik" Type="Boolean" />
+          <NavigationProperty Name="TblUrun" Relationship="DbTeknoKurModel.FK_TblFavori_TblUrun" FromRole="TblFavori" ToRole="TblUrun" />
+          <NavigationProperty Name="TblUye" Relationship="DbTeknoKurModel.FK_TblFavori_TblUye" FromRole="TblFavori" ToRole="TblUye" />
+        </EntityType>
+        <EntityType Name="VwKisiAdresTelefon">
+          <Key>
+            <PropertyRef Name="KisiId" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="AdresBaslik" />
+            <PropertyRef Name="AdresUlke" />
+            <PropertyRef Name="AdresIl" />
+            <PropertyRef Name="AdresIlce" />
+            <PropertyRef Name="Adres" />
+            <PropertyRef Name="TelefonNumarasi" />
+            <PropertyRef Name="AdresId" />
+            <PropertyRef Name="TelefonId" />
+          </Key>
+          <Property Name="KisiId" Type="Int32" Nullable="false" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="AdresBaslik" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdresUlke" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="AdresIl" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdresIlce" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonNumarasi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AdresId" Type="Int32" Nullable="false" />
+          <Property Name="TelefonId" Type="Int32" Nullable="false" />
+          <Property Name="FaturaAdresi" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_TblFavori_TblUrun">
+          <End Type="DbTeknoKurModel.TblUrun" Role="TblUrun" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTeknoKurModel.TblFavori" Role="TblFavori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblFavori">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblFavori_TblUye">
+          <End Type="DbTeknoKurModel.TblUye" Role="TblUye" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="DbTeknoKurModel.TblFavori" Role="TblFavori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblFavori">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblSepet">
+          <Key>
+            <PropertyRef Name="SepetId" />
+          </Key>
+          <Property Name="SepetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="UrunId" Type="Int32" Nullable="false" />
+          <Property Name="Adet" Type="Int32" Nullable="false" />
+          <Property Name="ToplamFiyat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="EklenmeTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TblUrun" Relationship="DbTeknoKurModel.FK_Sepetler_Urunler" FromRole="TblSepet" ToRole="TblUrun" />
+        </EntityType>
+        <Association Name="FK_Sepetler_Urunler">
+          <End Type="DbTeknoKurModel.TblUrun" Role="TblUrun" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblSepet" Role="TblSepet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblSepet">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TblSiteAyarlar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiteBaslik" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SiteAcik" Type="Boolean" Nullable="false" />
+          <Property Name="MetaTaglari" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AnahtarKelimeler" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StandartHizmetBedeli" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="TblSiparis">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+          </Key>
+          <Property Name="SiparisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="SiparisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToplamTutar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OdemeDurumu" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TblSiparisDetay" Relationship="DbTeknoKurModel.FK_SiparisDetay_Siparis" FromRole="TblSiparis" ToRole="TblSiparisDetay" />
+          <NavigationProperty Name="TblUye" Relationship="DbTeknoKurModel.FK_TblSiparis_Uye" FromRole="TblSiparis" ToRole="TblUye" />
+          <Property Name="AdresId" Type="Int32" />
+          <NavigationProperty Name="TblKisiAdres" Relationship="DbTeknoKurModel.FK_TblSiparis_Adres" FromRole="TblSiparis" ToRole="TblKisiAdres" />
+        </EntityType>
+        <EntityType Name="TblSiparisDetay">
+          <Key>
+            <PropertyRef Name="SiparisDetayId" />
+          </Key>
+          <Property Name="SiparisDetayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiparisId" Type="Int32" Nullable="false" />
+          <Property Name="UrunId" Type="Int32" Nullable="false" />
+          <Property Name="Adet" Type="Int32" Nullable="false" />
+          <Property Name="UrunFiyat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ToplamTutar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="TblSiparis" Relationship="DbTeknoKurModel.FK_SiparisDetay_Siparis" FromRole="TblSiparisDetay" ToRole="TblSiparis" />
+          <NavigationProperty Name="TblUrun" Relationship="DbTeknoKurModel.FK_SiparisDetay_Urun" FromRole="TblSiparisDetay" ToRole="TblUrun" />
+        </EntityType>
+        <Association Name="FK_SiparisDetay_Siparis">
+          <End Type="DbTeknoKurModel.TblSiparis" Role="TblSiparis" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblSiparisDetay" Role="TblSiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblSiparis">
+              <PropertyRef Name="SiparisId" />
+            </Principal>
+            <Dependent Role="TblSiparisDetay">
+              <PropertyRef Name="SiparisId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSiparis_Uye">
+          <End Type="DbTeknoKurModel.TblUye" Role="TblUye" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblSiparis" Role="TblSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblSiparis">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisDetay_Urun">
+          <End Type="DbTeknoKurModel.TblUrun" Role="TblUrun" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblSiparisDetay" Role="TblSiparisDetay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblSiparisDetay">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblSiparis_Adres">
+          <End Type="DbTeknoKurModel.TblKisiAdres" Role="TblKisiAdres" Multiplicity="0..1" />
+          <End Type="DbTeknoKurModel.TblSiparis" Role="TblSiparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblKisiAdres">
+              <PropertyRef Name="AdresId" />
+            </Principal>
+            <Dependent Role="TblSiparis">
+              <PropertyRef Name="AdresId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VwSiparisUrun">
+          <Key>
+            <PropertyRef Name="SiparisId" />
+            <PropertyRef Name="UyeId" />
+            <PropertyRef Name="SiparisTarihi" />
+            <PropertyRef Name="ToplamTutar" />
+            <PropertyRef Name="OdemeDurumu" />
+            <PropertyRef Name="UrunId" />
+            <PropertyRef Name="KategoriId" />
+            <PropertyRef Name="MarkaId" />
+            <PropertyRef Name="UrunAdi" />
+            <PropertyRef Name="UrunKodu" />
+            <PropertyRef Name="UrunResimUrl" />
+            <PropertyRef Name="UrunFiyat" />
+            <PropertyRef Name="UrunAciklama" />
+            <PropertyRef Name="TeknikOzellikler" />
+            <PropertyRef Name="Stok" />
+          </Key>
+          <Property Name="SiparisId" Type="Int32" Nullable="false" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="AdresId" Type="Int32" />
+          <Property Name="SiparisTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ToplamTutar" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OdemeDurumu" Type="Boolean" Nullable="false" />
+          <Property Name="UrunId" Type="Int32" Nullable="false" />
+          <Property Name="KategoriId" Type="Int32" Nullable="false" />
+          <Property Name="MarkaId" Type="Int32" Nullable="false" />
+          <Property Name="UrunAdi" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UrunKodu" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UrunResimUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UrunFiyat" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UrunAciklama" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TeknikOzellikler" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Stok" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblYorum">
+          <Key>
+            <PropertyRef Name="YorumId" />
+          </Key>
+          <Property Name="YorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunId" Type="Int32" Nullable="false" />
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="YorumIcerik" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YorumTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Onaylandi" Type="Boolean" Nullable="false" />
+          <Property Name="Silik" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TblUrun" Relationship="DbTeknoKurModel.FK_Yorumlar_Urunler" FromRole="TblYorum" ToRole="TblUrun" />
+          <NavigationProperty Name="TblUye" Relationship="DbTeknoKurModel.FK_Yorum_Uye" FromRole="TblYorum" ToRole="TblUye" />
+        </EntityType>
+        <Association Name="FK_Yorumlar_Urunler">
+          <End Type="DbTeknoKurModel.TblUrun" Role="TblUrun" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblYorum" Role="TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUrun">
+              <PropertyRef Name="UrunId" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="UrunId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorum_Uye">
+          <End Type="DbTeknoKurModel.TblUye" Role="TblUye" Multiplicity="1" />
+          <End Type="DbTeknoKurModel.TblYorum" Role="TblYorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblUye">
+              <PropertyRef Name="UyeId" />
+            </Principal>
+            <Dependent Role="TblYorum">
+              <PropertyRef Name="UyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VwUyeKisi">
+          <Key>
+            <PropertyRef Name="UyeId" />
+            <PropertyRef Name="Expr1" />
+            <PropertyRef Name="UyeMailAdresi" />
+            <PropertyRef Name="Sifre" />
+            <PropertyRef Name="KisiAd" />
+            <PropertyRef Name="KisiSoyad" />
+            <PropertyRef Name="KisiTc" />
+            <PropertyRef Name="UyeKayitTarihi" />
+          </Key>
+          <Property Name="UyeId" Type="Int32" Nullable="false" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="UyeMailAdresi" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Sifre" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Donuk" Type="Boolean" />
+          <Property Name="DondurmaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="KisiAd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KisiSoyad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KisiTc" Type="Int64" Nullable="false" />
+          <Property Name="KisiDogumTarihi" Type="DateTime" Precision="0" />
+          <Property Name="KisiCinsiyet" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="UyeKayitTarihi" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Admin" Type="Boolean" />
+          <Property Name="Silik" Type="Boolean" />
+          <Property Name="Expr2" Type="Boolean" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTeknoKurModelStoreContainer" CdmEntityContainer="DbTeknoKurEntities">
+          <EntitySetMapping Name="TblKategoriler">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblKategoriler">
+              <MappingFragment StoreEntitySet="TblKategoriler">
+                <ScalarProperty Name="UstKategoriId" ColumnName="UstKategoriId" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="KategoriAdi" ColumnName="KategoriAdi" />
+                <ScalarProperty Name="KategoriSeo" ColumnName="KategoriSeo" />
+                <ScalarProperty Name="EkleyenUyeId" ColumnName="EkleyenUyeId" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="SilenUyeId" ColumnName="SilenUyeId" />
+                <ScalarProperty Name="SilmeTarihi" ColumnName="SilmeTarihi" />
+                <ScalarProperty Name="GuncelleyenUyeId" ColumnName="GuncelleyenUyeId" />
+                <ScalarProperty Name="GuncellemeTarihi" ColumnName="GuncellemeTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblMarka">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblMarka">
+              <MappingFragment StoreEntitySet="TblMarka">
+                <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+                <ScalarProperty Name="MarkaAdi" ColumnName="MarkaAdi" />
+                <ScalarProperty Name="MarkaSeo" ColumnName="MarkaSeo" />
+                <ScalarProperty Name="EkleyenUyeId" ColumnName="EkleyenUyeId" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="SilenUyeId" ColumnName="SilenUyeId" />
+                <ScalarProperty Name="SilmeTarihi" ColumnName="SilmeTarihi" />
+                <ScalarProperty Name="GuncelleyenUyeId" ColumnName="GuncelleyenUyeId" />
+                <ScalarProperty Name="GuncellemeTarihi" ColumnName="GuncellemeTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUrun">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblUrun">
+              <MappingFragment StoreEntitySet="TblUrun">
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="UrunResimUrl" ColumnName="UrunResimUrl" />
+                <ScalarProperty Name="UrunSeo" ColumnName="UrunSeo" />
+                <ScalarProperty Name="UrunTaglar" ColumnName="UrunTaglar" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="UrunAciklama" ColumnName="UrunAciklama" />
+                <ScalarProperty Name="TeknikOzellikler" ColumnName="TeknikOzellikler" />
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="EkleyenUyeId" ColumnName="EkleyenUyeId" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="SilenUyeId" ColumnName="SilenUyeId" />
+                <ScalarProperty Name="SilmeTarihi" ColumnName="SilmeTarihi" />
+                <ScalarProperty Name="GuncelleyenUyeId" ColumnName="GuncelleyenUyeId" />
+                <ScalarProperty Name="GuncellemeTarihi" ColumnName="GuncellemeTarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUyeKisi">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblUyeKisi">
+              <MappingFragment StoreEntitySet="TblUyeKisi">
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="KisiCinsiyet" ColumnName="KisiCinsiyet" />
+                <ScalarProperty Name="KisiDogumTarihi" ColumnName="KisiDogumTarihi" />
+                <ScalarProperty Name="KisiTc" ColumnName="KisiTc" />
+                <ScalarProperty Name="KisiSoyad" ColumnName="KisiSoyad" />
+                <ScalarProperty Name="KisiAd" ColumnName="KisiAd" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="KisiId" ColumnName="KisiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblUye">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblUye">
+              <MappingFragment StoreEntitySet="TblUye">
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="SifirlamaKodu" ColumnName="SifirlamaKodu" />
+                <ScalarProperty Name="SifremiUnuttum" ColumnName="SifremiUnuttum" />
+                <ScalarProperty Name="SilinmeTarihi" ColumnName="SilinmeTarihi" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="DondurmaTarihi" ColumnName="DondurmaTarihi" />
+                <ScalarProperty Name="Donuk" ColumnName="Donuk" />
+                <ScalarProperty Name="UyeKayitTarihi" ColumnName="UyeKayitTarihi" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="UyeMailAdresi" ColumnName="UyeMailAdresi" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblKisiAdres">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblKisiAdres">
+              <MappingFragment StoreEntitySet="TblKisiAdres">
+                <ScalarProperty Name="GuncellemeTarihi" ColumnName="GuncellemeTarihi" />
+                <ScalarProperty Name="GuncelleyenUyeId" ColumnName="GuncelleyenUyeId" />
+                <ScalarProperty Name="SilmeTarihi" ColumnName="SilmeTarihi" />
+                <ScalarProperty Name="SilenUyeId" ColumnName="SilenUyeId" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="EkleyenUyeId" ColumnName="EkleyenUyeId" />
+                <ScalarProperty Name="FaturaAdresi" ColumnName="FaturaAdresi" />
+                <ScalarProperty Name="Varsayilan" ColumnName="Varsayilan" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="AdresIlce" ColumnName="AdresIlce" />
+                <ScalarProperty Name="AdresIl" ColumnName="AdresIl" />
+                <ScalarProperty Name="AdresUlke" ColumnName="AdresUlke" />
+                <ScalarProperty Name="AdresBaslik" ColumnName="AdresBaslik" />
+                <ScalarProperty Name="KisiId" ColumnName="KisiId" />
+                <ScalarProperty Name="AdresId" ColumnName="AdresId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblKisiTelefon">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblKisiTelefon">
+              <MappingFragment StoreEntitySet="TblKisiTelefon">
+                <ScalarProperty Name="GuncellemeTarihi" ColumnName="GuncellemeTarihi" />
+                <ScalarProperty Name="GuncelleyenUyeId" ColumnName="GuncelleyenUyeId" />
+                <ScalarProperty Name="SilmeTarihi" ColumnName="SilmeTarihi" />
+                <ScalarProperty Name="SilenUyeId" ColumnName="SilenUyeId" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="EkleyenUyeId" ColumnName="EkleyenUyeId" />
+                <ScalarProperty Name="Varsayilan" ColumnName="Varsayilan" />
+                <ScalarProperty Name="TelefonNumarasi" ColumnName="TelefonNumarasi" />
+                <ScalarProperty Name="KisiId" ColumnName="KisiId" />
+                <ScalarProperty Name="TelefonId" ColumnName="TelefonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblFavori">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblFavori">
+              <MappingFragment StoreEntitySet="TblFavori">
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="FavoriId" ColumnName="FavoriId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VwKisiAdresTelefon">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.VwKisiAdresTelefon">
+              <MappingFragment StoreEntitySet="VwKisiAdresTelefon">
+                <ScalarProperty Name="FaturaAdresi" ColumnName="FaturaAdresi" />
+                <ScalarProperty Name="TelefonId" ColumnName="TelefonId" />
+                <ScalarProperty Name="AdresId" ColumnName="AdresId" />
+                <ScalarProperty Name="TelefonNumarasi" ColumnName="TelefonNumarasi" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="AdresIlce" ColumnName="AdresIlce" />
+                <ScalarProperty Name="AdresIl" ColumnName="AdresIl" />
+                <ScalarProperty Name="AdresUlke" ColumnName="AdresUlke" />
+                <ScalarProperty Name="AdresBaslik" ColumnName="AdresBaslik" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="KisiId" ColumnName="KisiId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSepet">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblSepet">
+              <MappingFragment StoreEntitySet="TblSepet">
+                <ScalarProperty Name="EklenmeTarihi" ColumnName="EklenmeTarihi" />
+                <ScalarProperty Name="ToplamFiyat" ColumnName="ToplamFiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="SepetId" ColumnName="SepetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSiteAyarlar">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblSiteAyarlar">
+              <MappingFragment StoreEntitySet="TblSiteAyarlar">
+                <ScalarProperty Name="StandartHizmetBedeli" ColumnName="StandartHizmetBedeli" />
+                <ScalarProperty Name="AnahtarKelimeler" ColumnName="AnahtarKelimeler" />
+                <ScalarProperty Name="MetaTaglari" ColumnName="MetaTaglari" />
+                <ScalarProperty Name="SiteAcik" ColumnName="SiteAcik" />
+                <ScalarProperty Name="SiteBaslik" ColumnName="SiteBaslik" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSiparis">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblSiparis">
+              <MappingFragment StoreEntitySet="TblSiparis">
+                <ScalarProperty Name="AdresId" ColumnName="AdresId" />
+                <ScalarProperty Name="OdemeDurumu" ColumnName="OdemeDurumu" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="SiparisTarihi" ColumnName="SiparisTarihi" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="SiparisId" ColumnName="SiparisId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblSiparisDetay">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblSiparisDetay">
+              <MappingFragment StoreEntitySet="TblSiparisDetay">
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="Adet" ColumnName="Adet" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="SiparisId" ColumnName="SiparisId" />
+                <ScalarProperty Name="SiparisDetayId" ColumnName="SiparisDetayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VwSiparisUrun">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.VwSiparisUrun">
+              <MappingFragment StoreEntitySet="VwSiparisUrun">
+                <ScalarProperty Name="Stok" ColumnName="Stok" />
+                <ScalarProperty Name="TeknikOzellikler" ColumnName="TeknikOzellikler" />
+                <ScalarProperty Name="UrunAciklama" ColumnName="UrunAciklama" />
+                <ScalarProperty Name="UrunFiyat" ColumnName="UrunFiyat" />
+                <ScalarProperty Name="UrunResimUrl" ColumnName="UrunResimUrl" />
+                <ScalarProperty Name="UrunKodu" ColumnName="UrunKodu" />
+                <ScalarProperty Name="UrunAdi" ColumnName="UrunAdi" />
+                <ScalarProperty Name="MarkaId" ColumnName="MarkaId" />
+                <ScalarProperty Name="KategoriId" ColumnName="KategoriId" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="OdemeDurumu" ColumnName="OdemeDurumu" />
+                <ScalarProperty Name="ToplamTutar" ColumnName="ToplamTutar" />
+                <ScalarProperty Name="SiparisTarihi" ColumnName="SiparisTarihi" />
+                <ScalarProperty Name="AdresId" ColumnName="AdresId" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="SiparisId" ColumnName="SiparisId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblYorum">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.TblYorum">
+              <MappingFragment StoreEntitySet="TblYorum">
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="Onaylandi" ColumnName="Onaylandi" />
+                <ScalarProperty Name="YorumTarihi" ColumnName="YorumTarihi" />
+                <ScalarProperty Name="YorumIcerik" ColumnName="YorumIcerik" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="YorumId" ColumnName="YorumId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VwUyeKisi">
+            <EntityTypeMapping TypeName="DbTeknoKurModel.VwUyeKisi">
+              <MappingFragment StoreEntitySet="VwUyeKisi">
+                <ScalarProperty Name="Expr2" ColumnName="Expr2" />
+                <ScalarProperty Name="Silik" ColumnName="Silik" />
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
+                <ScalarProperty Name="UyeKayitTarihi" ColumnName="UyeKayitTarihi" />
+                <ScalarProperty Name="KisiCinsiyet" ColumnName="KisiCinsiyet" />
+                <ScalarProperty Name="KisiDogumTarihi" ColumnName="KisiDogumTarihi" />
+                <ScalarProperty Name="KisiTc" ColumnName="KisiTc" />
+                <ScalarProperty Name="KisiSoyad" ColumnName="KisiSoyad" />
+                <ScalarProperty Name="KisiAd" ColumnName="KisiAd" />
+                <ScalarProperty Name="DondurmaTarihi" ColumnName="DondurmaTarihi" />
+                <ScalarProperty Name="Donuk" ColumnName="Donuk" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+                <ScalarProperty Name="UyeMailAdresi" ColumnName="UyeMailAdresi" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="UyeId" ColumnName="UyeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Layer.Data.VwUyeKisi>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KisiAd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KisiSoyad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UyeMailAdresi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Admin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UyeKayitTarihi)
+            </th>
+
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.KisiAd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KisiSoyad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UyeMailAdresi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Admin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UyeKayitTarihi)
+                </td>
+                <td>
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.UyeId }) |
+                    @Html.ActionLink("Detay", "Detay", new { id = item.UyeId }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.UyeId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

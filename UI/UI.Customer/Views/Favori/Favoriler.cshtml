@@ -1,0 +1,85 @@
+﻿@{
+	ViewData["Title"] = "Favoriler";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+	bool isUserLoggedIn = (bool)ViewBag.IsUserLoggedIn;
+}
+
+<!-- breadcrumb-area-start -->
+<div class="breadcrumb-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb-content text-center">
+					<div class="breadcrumb-title">
+						<h3><a href="#">Favoriler</a></h3>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- breadcrumb-area-end -->
+<!-- cart-main-area-start -->
+<div class="cart-main-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				@if (isUserLoggedIn && ViewBag.FavoriListesi != null && ((List<object>)ViewBag.FavoriListesi).Any())
+				{
+					<div class="wishlist-content">
+						<form action="#">
+							<div class="wishlist-table table-responsive">
+								<table>
+									<thead>
+										<tr>
+											<th class="product-remove"><span class="nobr">Kaldır</span></th>
+											<th class="product-thumbnail">Resim</th>
+											<th class="product-name">Ürün Adı</th>
+											<th class="product-price">Fiyatı</th>
+											<th class="product-stock-stauts">Stok Durumu</th>
+											<th class="product-add-to-cart">Sepete Ekle</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (dynamic favoriItem in (List<object>)ViewBag.FavoriListesi)
+										{
+											<tr>
+												<td class="product-remove">
+													<a href="#" class="favori-kaldir" data-id="@favoriItem.FavoriId">×</a>
+												</td>
+												<td class="product-thumbnail"><a href="#"><img src="@favoriItem.ResimUrl" alt="@favoriItem.UrunAdi" /></a></td>
+												<td class="product-name"><a href="#">@favoriItem.UrunAdi</a></td>
+												<td class="product-price"><span class="amount">@favoriItem.Fiyat.ToString("C")</span></td>
+												<td class="product-stock-status"><span class="wishlist-in-stock">@favoriItem.StokDurumu</span></td>
+												<td class="product-add-to-cart">
+													<a href="javascript:void(0)" class="sepete-ekle-btn" data-id="@favoriItem.UrunId">
+														<i class="fa fa-shopping-cart"></i> Sepete Ekle
+													</a>
+													</td>
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
+				}
+				else
+				{
+					<center>
+					<div class="no-items-message" id="no-cart-items-message">
+						<p>Favorilerinize eklediğiniz ürün bulunmamaktadır.</p>
+						<a href="/" class="btn btn-primary mt-3">Alışverişe Başla</a>
+					</div>
+					</center>
+				}
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- cart-main-area-end -->
+

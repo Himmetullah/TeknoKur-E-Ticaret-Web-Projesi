@@ -1,0 +1,28 @@
+﻿@model List<Layer.Data.TblUrun>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var urun in Model)
+    {
+        <div class="product-row">
+            <div class="col-img">
+                <img src="@(string.IsNullOrEmpty(urun.UrunResimUrl) ? "/images/default_product.png" : urun.UrunResimUrl)" alt="@urun.UrunAdi" />
+            </div>
+            <div class="col-name">@urun.UrunAdi</div>
+            <div class="col-description">@urun.UrunAciklama</div>
+            <div class="col-price">@urun.UrunFiyat.ToString("N2") TL</div>
+            <div class="col-action">
+                <button data-product-id="@urun.UrunId"
+                        data-product-name="@urun.UrunAdi"
+                        data-product-price="@urun.UrunFiyat"
+                        data-category-id="@urun.KategoriId">
+                    Seç
+                </button>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p class="no-products-message">Bu kategoriye ait ürün bulunmamaktadır.</p>
+}

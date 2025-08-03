@@ -1,0 +1,118 @@
+﻿@model Layer.Data.TblUrun
+@{
+	ViewData["Title"] = "Duzenle";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Ürün Düzenleme Formu</h2>
+<hr />
+
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger">
+		@ViewBag.ErrorMessage
+	</div>
+}
+
+<div class="row">
+	<div class="col-md-4">
+		@using (Html.BeginForm("Duzenle", "Urun", FormMethod.Post))
+		{
+			<input type="hidden" value="@Model.UrunId" name="UrunId" />
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunAdi" placeholder="Benzersiz Ürün Adı" name="UrunAdi"
+						   value="@Model.UrunAdi">
+					<label for="UrunAdi">Ürün Adı</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					@Html.DropDownList("KategoriId", (List<SelectListItem>)ViewBag.Kategoriler, "Kategori Seçiniz", new { @class = "form-select" })
+					<label for="KategoriId">Kategori</label>
+				</div>
+			</div>
+
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					@Html.DropDownList("MarkaId", (List<SelectListItem>)ViewBag.Markalar, "Marka Seçiniz", new { @class = "form-select" })
+					<label for="MarkaId">Marka</label>
+				</div>
+			</div>
+
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunKodu" placeholder="Benzersiz Ürün Kodu" name="UrunKodu"
+						   value="@(Model != null ? Model.UrunKodu : "")">
+					<label for="UrunKodu">Ürün Kodu</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunResimUrl" placeholder="Benzersiz Ürün Resim Url" name="UrunResimUrl"
+						   value="@(Model != null ? Model.UrunResimUrl : "")">
+					<label for="UrunResimUrl">Resim Url</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunSeo" placeholder="Benzersiz Ürün Seo" name="UrunSeo"
+						   value="@(Model != null ? Model.UrunSeo : "")">
+					<label for="UrunSeo">Ürün Seo</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunTaglar" placeholder="Benzersiz Ürün Taglar" name="UrunTaglar"
+						   value="@(Model != null ? Model.UrunTaglar : "")">
+					<label for="UrunTaglar">Ürün Taglar</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunFiyat" placeholder="Ürün Fiyat" name="UrunFiyat"
+						   value="@(Model != null ? Model.UrunFiyat : "")">
+					<label for="UrunFiyat">Ürün Fiyatı</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="UrunAciklama" placeholder="Benzersiz Ürün Açıklama" name="UrunAciklama"
+						   value="@(Model != null ? Model.UrunAciklama : "")">
+					<label for="UrunAciklama">Ürün Açıklama</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="TeknikOzellikler" placeholder="Benzersiz Ürün Teknik Özellikler" name="TeknikOzellikler"
+						   value="@(Model != null ? Model.TeknikOzellikler : "")">
+					<label for="TeknikOzellikler">Ürün Teknik Özellikler </label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="Stok" placeholder="Benzersiz Stok Adedi" name="Stok"
+						   value="@(Model != null ? Model.Stok : "")">
+					<label for="Stok">Stok Adedi</label>
+				</div>
+			</div>
+					
+			<div class="col-md-12">
+				<div class="d-flex align-items-center justify-content-md-end justify-content-center">
+					<a href="/Urun">geri dön</a>
+					<div class="add-new">
+						<button class="btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+							<i class="ri-add-line me-0 me-sm-1 d-inline-block d-sm-none"></i>
+							<span class="d-none d-sm-inline-block"> Kaydet </span>
+						</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+

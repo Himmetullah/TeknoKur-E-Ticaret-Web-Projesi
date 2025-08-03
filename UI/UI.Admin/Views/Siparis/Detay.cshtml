@@ -1,0 +1,51 @@
+﻿@model Layer.Data.TblSiparis
+@{
+    ViewData["Title"] = "Sipariş Detayları";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <h3 class="mb-4">Sipariş Detayları - #@Model.SiparisId</h3>
+        <a href="/Siparis" asp-action="Index" class="btn btn-secondary">Sipariş Listesine Geri Dön</a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Sipariş Bilgileri</h5>
+            <p><strong>Sipariş Tarihi:</strong> @Model.SiparisTarihi.ToString("dd.MM.yyyy")</p>
+            <p><strong>Toplam Tutar:</strong> @Model.ToplamTutar ₺</p>
+            <p><strong>Ödeme Durumu:</strong> @Model.OdemeDurumu</p>
+        </div>
+    </div>
+
+    @if (Model.TblSiparisDetay != null && Model.TblSiparisDetay.Any())
+    {
+        <h4>Sipariş Edilen Ürünler</h4>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Ürün Adı</th>
+                    <th>Adet</th>
+                    <th>Ürün Fiyat</th>
+                    <th>Toplam</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var detay in Model.TblSiparisDetay)
+                {
+                    <tr>
+                        <td>@detay.UrunId</td>
+                        <td>@detay.Adet</td>
+                        <td>@detay.UrunFiyat</td>
+                        <td>@(detay.Adet* detay.UrunFiyat) ₺</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">Bu siparişe ait ürün detayı bulunmamaktadır.</div>
+    }
+</div>

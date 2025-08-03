@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Layer.Data.TblUrun>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UrunAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrunKodu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UrunFiyat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stok)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KategoriId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarkaId)
+            </th>
+
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UrunAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UrunKodu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UrunFiyat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stok)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KategoriId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarkaId)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.UrunId }) |
+                    @Html.ActionLink("Detay", "Detay", new { id = item.UrunId }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.UrunId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

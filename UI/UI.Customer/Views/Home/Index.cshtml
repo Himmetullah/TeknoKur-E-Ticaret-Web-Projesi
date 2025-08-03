@@ -1,0 +1,150 @@
+﻿@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+	var masustuBilgisayarKategori = ViewBag.masustuBilgisayarUrunler as List<Layer.Data.TblUrun>;
+	var kulakliklar = ViewBag.Kulakliklar as List<Layer.Data.TblUrun>;
+	var klavyeler = ViewBag.Klavyeler as List<Layer.Data.TblUrun>;
+	var mouselar = ViewBag.Mouselar as List<Layer.Data.TblUrun>;
+}
+
+<!-- slider-area-start -->
+<div class="slider-area">
+
+	<div class="custom-slider" style="background-color: #121212; padding: 50px 0; color: white;">
+		<div class="container">
+			<div class="row align-items-center">
+				@if (masustuBilgisayarKategori != null && masustuBilgisayarKategori.Count > 0)
+				{
+					foreach (var urun in masustuBilgisayarKategori.Take(1))
+					{
+						<div class="col-md-6">
+							<h1 style="font-size: 48px; font-weight: bold;">Alışverişe Başla!</h1>
+							<h2 style="font-size: 36px;">Hazır <span style="color: #A3D900;">Sistem</span></h2>
+							<p style="font-size: 18px; margin-top: 20px;">@urun.UrunAciklama</p>
+							<a href="@urun.UrunSeo" class="btn btn-light mt-4">Ürüne Git</a>
+						</div>
+						<div class="col-md-6 text-center">
+							<img src="@urun.UrunResimUrl" alt="Ürün Görseli" style="max-width: 60%; height: auto;" />
+						</div>
+					}
+				}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- slider-area-end -->
+<!-- pos_new_product-area-start -->
+
+<div class="pos_new_product ptb-80">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title mb-30">
+					<h2>Kulaklıklar</h2>
+				</div>
+			</div>
+		</div>
+		<div class="product-active-3 owl-carousel">
+			@if (kulakliklar != null)
+			{
+				@foreach (var urun in kulakliklar)
+				{
+					<div class="single-product">
+						<div class="product-img">
+							<a href="@urun.UrunSeo">
+								<img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="first" />
+							</a>
+						</div>
+						<div class="product-content">
+							<h3>
+								<a href="@urun.UrunSeo" style="height: 40px; overflow: hidden;">@urun.UrunAdi</a>
+							</h3>
+							<div class="product-price">
+								<ul>
+									<li class="new-price">@urun.UrunFiyat ₺</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		</div>
+	</div>
+</div>
+
+<div class="pos_new_product ptb-80">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title mb-30">
+					<h2>Klavyeler</h2>
+				</div>
+			</div>
+		</div>
+		<div class="product-active-3 owl-carousel">
+			@if (klavyeler != null)
+			{
+				@foreach (var urun in klavyeler)
+				{
+					<div class="single-product">
+						<div class="product-img">
+							<a href="@urun.UrunSeo">
+								<img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="first" />
+							</a>
+						</div>
+						<div class="product-content">
+							<h3>
+								<a href="@urun.UrunSeo" style="height: 40px; overflow: hidden;">@urun.UrunAdi</a>
+							</h3>
+							<div class="product-price">
+								<ul>
+									<li class="new-price">@urun.UrunFiyat ₺</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		</div>
+
+	</div>
+</div>
+
+<div class="pos_new_product ptb-80">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="section-title mb-30">
+					<h2>Mouselar</h2>
+				</div>
+			</div>
+		</div>
+		<div class="product-active-3 owl-carousel">
+			@if (mouselar != null)
+			{
+				@foreach (var urun in mouselar)
+				{
+					<div class="single-product">
+						<div class="product-img">
+							<a href="@urun.UrunSeo">
+								<img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" class="first" />
+							</a>
+						</div>
+						<div class="product-content">
+							<h3>
+								<a href="@urun.UrunSeo" style="height: 40px; overflow: hidden;">@urun.UrunAdi</a>
+							</h3>
+							<div class="product-price">
+								<ul>
+									<li class="new-price">@urun.UrunFiyat ₺</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		</div>
+
+	</div>
+</div>
+<!-- pos_new_product-area-end -->

@@ -1,0 +1,31 @@
+﻿@model Layer.Data.TblMarka
+@{
+	ViewData["Title"] = "Sil";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+	<h5>@Model.MarkaAdi isimli ürünü silmek istediğinden emin misin ?</h5>
+	<dl class="row">
+		<dt class="col-sm-2">
+			Marka Id
+		</dt>
+
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaId)
+		</dd>
+		<dt class="col-sm-2">
+			Marka Adı
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.MarkaAdi)
+		</dd>
+	</dl>
+
+	<form asp-controller="Marka" asp-action="Sil" method="post">
+		@Html.AntiForgeryToken()
+		<input type="hidden" name="id" value="@Model.MarkaId" />
+		<input type="submit" value="Sil" class="btn btn-danger" />
+		<a href="/Marka">geri dön</a>
+	</form>
+</div>
+

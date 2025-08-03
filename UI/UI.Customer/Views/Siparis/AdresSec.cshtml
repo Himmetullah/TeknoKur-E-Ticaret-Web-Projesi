@@ -1,0 +1,255 @@
+﻿@{
+	ViewData["Title"] = "AdresSec";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+
+	var kullaniciAdresleri = ViewBag.KullaniciAdresleri as List<Layer.Data.TblKisiAdres>;
+	var urunler = ViewBag.SepetUrunler as List<dynamic>;
+	decimal toplam = ViewBag.ToplamFiyat ?? 0;
+}
+
+<style>
+	/* Sepet görünümündeki stiller burada da kullanılabilir, veya kendine özgü stiller ekleyebilirsin */
+	.adres-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 30px;
+	}
+
+	.adres-secim-kismi {
+		flex: 2; /* Sepet ürünlerinden biraz daha az yer kaplasın */
+		min-width: 350px;
+	}
+
+	.siparis-ozet-kismi {
+		flex: 1;
+		min-width: 280px;
+		border: 1px solid #ddd;
+		padding: 20px;
+		height: fit-content;
+		background-color: #f9f9f9;
+		border-radius: 10px;
+	}
+
+	.adres-card {
+		border: 1px solid #e0e0e0;
+		padding: 15px;
+		margin-bottom: 15px;
+		border-radius: 8px;
+		background-color: #fff;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+	}
+
+		.adres-card:hover {
+			border-color: #007bff;
+			box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+		}
+
+		.adres-card.selected {
+			border: 2px solid #28a745; /* Yeşil kenarlık seçili adresi belirtir */
+			box-shadow: 0 0 10px rgba(40, 167, 69, 0.3);
+		}
+
+		.adres-card h6 {
+			margin-bottom: 5px;
+			color: #333;
+		}
+
+		.adres-card p {
+			font-size: 0.9em;
+			color: #666;
+			margin-bottom: 2px;
+		}
+
+	.new-address-form {
+		border: 1px solid #d4edda; /* Light green border for new address form */
+		padding: 20px;
+		border-radius: 10px;
+		background-color: #f8fdf8;
+		margin-top: 20px;
+	}
+</style>
+
+<div class="breadcrumb-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb-content text-center">
+					<div class="breadcrumb-title">
+						<h3><a href="#">Adres Seçimi ve Sipariş Onayı</a></h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container mt-5">
+	<div class="adres-container">
+		<div class="adres-secim-kismi">
+			<h4>Adres Seçin</h4>
+			<div id="adres-listesi">
+				@if (kullaniciAdresleri != null && kullaniciAdresleri.Any())
+				{
+					foreach (var adres in kullaniciAdresleri)
+					{
+
+						<div class="adres-card" data-adres-id="@adres.AdresId">
+							<button class="adres-sil-btn btn btn-sm btn-danger" style="float:right;" title="Adresi Sil">✖</button>
+							<h6>@adres.AdresBaslik</h6>
+							<p>@adres.Adres</p>
+							<p>@adres.AdresIlce / @adres.AdresIl</p>
+						</div>
+					}
+				}
+				else
+				{
+					<div class="alert alert-info" role="alert">
+						Henüz kayıtlı bir adresiniz bulunmamaktadır. Lütfen yeni bir adres ekleyin.
+					</div>
+				}
+			</div>
+
+			<hr />
+			<h4>Yeni Adres Ekle</h4>
+			<div class="new-address-form">
+				<form id="new-address-form">
+					<div class="mb-3">
+						<label for="AdresBaslik" class="form-label">Adres Başlığı (Ev, İş vb.)</label>
+						<input type="text" class="form-control" id="AdresBaslik" name="AdresBaslik" required>
+					</div>
+					<div class="mb-3">
+						<label for="Adres" class="form-label">Açık Adres</label>
+						<textarea class="form-control" id="Adres" name="Adres" rows="3" required></textarea>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="AdresIl" class="form-label">İl</label>
+							<input type="text" class="form-control" id="AdresIl" name="AdresIl" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="AdresIlce" class="form-label">İlçe</label>
+							<input type="text" class="form-control" id="AdresIlce" name="AdresIlce" required>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label for="Telefon" class="form-label">Telefon Numarası</label>
+							<input type="text" class="form-control" id="Telefon" name="Telefon" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="AdresUlke" class="form-label">Ülke</label>
+							<input type="text" class="form-control" id="AdresUlke" name="AdresUlke" required value="Türkiye">
+						</div>
+					</div>
+					<label>Fatura Adresi :</label>
+					<input value="" type="checkbox" id="FaturaAdresi" name="FaturaAdresi" />
+					<button type="submit" class="btn btn-primary w-100">Adresi Ekle</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="siparis-ozet-kismi">
+			<h4>Sipariş Özeti</h4>
+			@if (urunler != null && urunler.Any())
+			{
+				foreach (var urun in urunler)
+				{
+					<p>@urun.UrunAdi (@urun.Adet adet) - @((urun.BirimFiyat * urun.Adet).ToString("C2"))</p>
+				}
+				<hr />
+			}
+			<p>Toplam Tutar: <strong id="order-grand-total">@toplam.ToString("C2")</strong></p>
+
+			<button type="button" id="siparis-tamamla-btn" class="btn btn-success w-100 mt-3" disabled>Ödeme Adımına Geç</button>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+		$(document).ready(function() {
+			let selectedAddressId = null;
+
+			$(document).on('click', '.adres-card', function() {
+				$('.adres-card').removeClass('selected');
+				$(this).addClass('selected');
+				selectedAddressId = $(this).data('adres-id');
+				$('#siparis-tamamla-btn').prop('disabled', false);
+			});
+
+			$('#new-address-form').submit(function(e) {
+				e.preventDefault();
+
+				let formData = $(this).serialize();
+
+				$.ajax({
+					url: '@Url.Action("YeniAdresEkle", "Siparis")',
+					type: 'POST',
+					data: formData,
+					success: function(response) {
+						if (response.success) {
+							alert(response.message);
+
+							let newAddressHtml = `
+								<div class="adres-card" data-adres-id="${response.adresId}">
+									<h6>${$('#AdresBaslik').val()}</h6>
+									<p>${$('#Adres').val()}</p>
+									<p>${$('#AdresIlce').val()} / ${$('#AdresIl').val()}</p>
+									<p>Ülke: ${$('#AdresUlke').val()}</p> <p>Telefon: ${$('#Telefon').val()}</p> ${$('#FaturaAdresi').is(':checked') ? '<p>Fatura Adresi: Evet</p>' : ''}
+								</div>
+							`;
+							$('#adres-listesi').append(newAddressHtml);
+
+							$('.adres-card').removeClass('selected');
+							$(`.adres-card[data-adres-id="${response.adresId}"]`).addClass('selected');
+							selectedAddressId = response.adresId;
+							$('#siparis-tamamla-btn').prop('disabled', false);
+							$('#new-address-form')[0].reset();
+						} else {
+							alert(response.message);
+						}
+					},
+					error: function() {
+						alert("Adres eklenirken bir hata oluştu.");
+					}
+				});
+			});
+					$(document).on('click', '.adres-sil-btn', function (e) {
+			e.stopPropagation(); // Bu satırın varlığı ve doğru çalışması önemli.
+			let card = $(this).closest('.adres-card');
+			let adresId = card.data('adres-id');
+
+			if (confirm("Bu adresi silmek istediğinize emin misiniz?")) {
+				$.ajax({
+					url: '@Url.Action("AdresSil", "Siparis")',
+					type: 'POST',
+					data: { adresId: adresId },
+					success: function (response) {
+						if (response.success) {
+							alert(response.message || "Adres başarıyla silindi.");
+							card.fadeOut(300, function () {
+								$(this).remove();
+							});
+						} else {
+							alert(response.message || "Adres silinirken bir hata oluştu.");
+						}
+					},
+					error: function () {
+						alert("Adres silinirken sunucuyla bağlantı hatası oluştu.");
+					}
+				});
+			}
+		});
+
+					$('#siparis-tamamla-btn').click(function() {
+			if (selectedAddressId) {
+				   window.location.href = '/Odeme/Index?adresId=' + selectedAddressId;
+			} else {
+				alert("Lütfen bir adres seçin veya yeni bir adres ekleyin.");
+			}
+		});
+	 }); 
+	</script>
+}
+

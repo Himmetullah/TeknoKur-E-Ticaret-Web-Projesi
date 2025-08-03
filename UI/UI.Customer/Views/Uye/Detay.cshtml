@@ -1,0 +1,154 @@
+﻿@{
+	ViewData["Title"] = "Detay";
+	Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+	var siparisleriniz = ViewBag.Siparisleriniz as IEnumerable<dynamic>;
+}
+
+<section class="pt-60 pb-60">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="list-group">
+					<li class="list-group-item" id="btnBilgi">Kullanıcı Bilgilerim</li>
+					<li class="list-group-item" id="btnIletisim">İletişim Bilgilerim</li>
+					<li class="list-group-item" id="btnSiparislerim">Siparişlerim</li>
+				</ul>
+			</div>
+
+			<div class="col-md-9">
+				<div id="bilgiPaneli">
+					<h4>Ad: @ViewBag.Ad</h4>
+					<h4>Soyad: @ViewBag.Soyad</h4>
+					<h4>Mail: @ViewBag.Mail</h4>
+				</div>
+
+				@using Layer.Data
+				@{
+					var adres = ViewBag.Adres as TblKisiAdres;
+					var telefon = ViewBag.Telefon as TblKisiTelefon;
+				}
+
+				<div id="iletisimPaneli" style="display:none">
+
+					<h4>İletişim Bilgileri</h4>
+
+					@if (ViewBag.Adres == null || ViewBag.Telefon == null)
+					{
+						<form method="post" action="/Uye/IletisimKaydetGuncelle">
+							<div class="row">
+								<label>Adres Başlık:</label>
+								<input type="text" name="AdresBaslik" required />
+								<label>Ülke:</label>
+								<input type="text" name="AdresUlke" required />
+								<label>İl:</label>
+								<input type="text" name="AdresIl" required />
+								<label>İlçe:</label>
+								<input type="text" name="AdresIlce" required />
+								<label>Adres:</label>
+								<input type="text" name="Adres" required />
+								<label>Fatura Adres:</label>
+								<input type="checkbox" name="FaturaAdresi" required />
+								<label>Telefon:</label>
+								<input type="text" name="Telefon" required />
+								<button type="submit" class="btn btn-success mt-2">Ekle</button>
+							</div>
+						</form>
+					}
+					else
+					{
+						<div id="iletisimGoruntuleme">
+							<p><strong>Adres Başlık:</strong> @ViewBag.Adres.AdresBaslik</p>
+							<p><strong>Ülke:</strong> @ViewBag.Adres.AdresUlke</p>
+							<p><strong>İl:</strong> @ViewBag.Adres.AdresIl</p>
+							<p><strong>İlçe:</strong> @ViewBag.Adres.AdresIlce</p>
+							<p><strong>Adres:</strong> @ViewBag.Adres.Adres</p>
+							<p><strong>Fatura Adresi:</strong> @ViewBag.Adres.FaturaAdresi</p>
+							<p><strong>Telefon:</strong> @ViewBag.Telefon.TelefonNumarasi</p>
+
+							<button class="btn btn-success" onclick="duzenlemeModunuAc()">Düzenle</button>
+						</div>
+
+						<form id="duzenlemeFormu" method="post" action="/Uye/IletisimKaydetGuncelle" style="display:none">
+							<div class="row">
+								<label>Adres Başlık:</label>
+								<input type="text" name="AdresBaslik" value="@ViewBag.Adres.AdresBaslik" required />
+								<label>Ülke:</label>
+								<input type="text" name="AdresUlke" value="@ViewBag.Adres.AdresUlke" required />
+								<label>İl:</label>
+								<input type="text" name="AdresIl" value="@ViewBag.Adres.AdresIl" required />
+								<label>İlçe:</label>
+								<input type="text" name="AdresIlce" value="@ViewBag.Adres.AdresIlce" required />
+								<label>Adres:</label>
+								<input type="text" name="Adres" value="@ViewBag.Adres.Adres" required />
+								<label>Fatura Adres:</label>
+								<input type="checkbox" name="FaturaAdresi" value="false" required />
+								<label>Telefon:</label>
+								<input type="text" name="Telefon" value="@ViewBag.Telefon.TelefonNumarasi" required />
+								<button type="submit" class="btn btn-success mt-2">Güncelle</button>
+							</div>
+						</form>
+					}
+
+				</div>
+
+				<div id="siparislerimPaneli" style="display:none;">
+					<h4>Siparişlerim</h4>
+
+					@if (siparisleriniz == null || !siparisleriniz.Any())
+					{
+						<p>Henüz siparişiniz bulunmamaktadır.</p>
+					}
+					else
+					{
+						foreach (var siparis in siparisleriniz)
+						{
+							<div class="card mb-3">
+								<div class="card-header">
+									Sipariş No: @siparis.SiparisId
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">Sipariş Tarihi: @(((DateTime)siparis.SiparisTarihi).ToString("dd.MM.yyyy HH:mm"))</h5>
+									<p class="card-text">Toplam Tutar: @(((decimal)siparis.ToplamTutar).ToString("C"))</p>
+									<p class="card-text">Ödeme Durumu: @(siparis.OdemeDurumu ? "Ödendi" : "Beklemede")</p>
+									<p class="card-text">Teslimat Adresi: @siparis.AdresDetay</p>
+								</div>
+							</div>
+						}
+					}
+				</div>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+		function duzenlemeModunuAc() {
+		document.getElementById("iletisimGoruntuleme").style.display = "none";
+		document.getElementById("duzenlemeFormu").style.display = "block";
+		document.getElementById("siparislerimPaneli").style.display = "none";
+	}
+
+		document.getElementById("btnBilgi").addEventListener("click", function () {
+		document.getElementById("bilgiPaneli").style.display = "block";
+		document.getElementById("iletisimPaneli").style.display = "none";
+		document.getElementById("siparislerimPaneli").style.display = "none";
+	});
+
+	document.getElementById("btnIletisim").addEventListener("click", function () {
+		document.getElementById("bilgiPaneli").style.display = "none";
+		document.getElementById("iletisimPaneli").style.display = "block";
+		document.getElementById("siparislerimPaneli").style.display = "none";
+	});
+
+	document.getElementById("btnSiparislerim").addEventListener("click", function () {
+		document.getElementById("bilgiPaneli").style.display = "none";
+		document.getElementById("iletisimPaneli").style.display = "none";
+		document.getElementById("siparislerimPaneli").style.display = "block";
+	});
+
+</script>
+
+
+

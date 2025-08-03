@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="App.Config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="App.Config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Layer\Layer.Business\Layer.Business\Layer.Business.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Data\Layer.Data.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Entities\Layer.Entities.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Enum\Layer.Enum.csproj" />
+    <ProjectReference Include="..\..\Layer\Layer.Security\Layer.Security.csproj" />
+  </ItemGroup>
+
+</Project>

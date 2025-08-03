@@ -1,0 +1,30 @@
+﻿@model Layer.Data.VwUyeKisi
+
+@{
+	ViewData["Title"] = "Üye Sil";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+	<h4 class="text-danger">"@Model.KisiAd @Model.KisiSoyad" adlı üyeyi silmek istediğinizden emin misiniz?</h4>
+
+	<hr />
+
+	<dl class="row">
+		<dt class="col-sm-3">Üye ID</dt>
+		<dd class="col-sm-9">@Model.UyeId</dd>
+
+		<dt class="col-sm-3">Ad Soyad</dt>
+		<dd class="col-sm-9">@Model.KisiAd @Model.KisiSoyad</dd>
+
+		<dt class="col-sm-3">E-Posta</dt>
+		<dd class="col-sm-9">@Model.UyeMailAdresi</dd>
+	</dl>
+
+	<form asp-controller="Uye" asp-action="Sil" method="post">
+		@Html.AntiForgeryToken()
+		<input type="hidden" name="id" value="@Model.UyeId" />
+		<input type="submit" value="Sil" class="btn btn-danger" />
+		<a href="/Uye">geri dön</a>
+	</form>
+</div>

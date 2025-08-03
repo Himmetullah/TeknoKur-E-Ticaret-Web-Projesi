@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Layer.Data.TblKategoriler>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.KategoriAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KategoriSeo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UstKategoriId)
+            </th>
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.KategoriAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KategoriSeo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UstKategoriId)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.KategoriId }) |
+                    @Html.ActionLink("Detay", "Detay", new { id = item.KategoriId }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.KategoriId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

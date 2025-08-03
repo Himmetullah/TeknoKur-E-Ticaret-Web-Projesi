@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "SiparisOnay";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="alert alert-success text-center">
+        <h3>@ViewBag.Mesaj</h3>
+        <p>Teşekkür ederiz. Alışverişiniz başarıyla tamamlandı.</p>
+        <p>Yönlendiriliyorsunuz...</p>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '/';
+    }, 4000); 
+</script>
+

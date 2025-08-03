@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Layer.Data.TblMarka>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MarkaAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MarkaSeo)
+            </th>
+            <th>
+                İşlemler
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarkaAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MarkaSeo)
+                </td>
+                <td>
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.MarkaId }) |
+                    @Html.ActionLink("Detay", "Detay", new { id = item.MarkaId }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.MarkaId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

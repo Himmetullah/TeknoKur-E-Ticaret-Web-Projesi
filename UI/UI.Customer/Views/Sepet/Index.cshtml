@@ -1,0 +1,283 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+	var urunler = ViewBag.SepetUrunler as List<dynamic>;
+	decimal toplam = ViewBag.ToplamFiyat ?? 0;
+
+    bool sepetBosMu = (urunler == null || !urunler.Any());
+	bool kullanicininAdresiVarmi = (ViewBag.KullaniciAdresiVarmi ?? false);
+}
+
+<style>
+    .btn.disabled-link {
+        pointer-events: none; 
+        opacity: 0.6; 
+        cursor: not-allowed; 
+    }
+	.sepet-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 30px;
+	}
+
+	.urunler-kismi {
+		flex: 3;
+		min-width: 300px;
+	}
+
+	.ozet-kismi {
+		flex: 1;
+		min-width: 250px;
+		border: 1px solid #ddd;
+		padding: 20px;
+		height: fit-content;
+		background-color: #f9f9f9;
+		border-radius: 10px;
+	}
+
+	.urun-card {
+		display: flex;
+		gap: 20px;
+		padding: 15px;
+		margin-bottom: 15px;
+		border: 1px solid #eee;
+		border-radius: 10px;
+		background-color: #fff;
+		align-items: center;
+	}
+
+		.urun-card img {
+			width: 100px;
+			height: 100px;
+			object-fit: contain;
+			flex-shrink: 0;
+		}
+
+	.urun-card-info {
+		flex-grow: 1;
+	}
+
+		.urun-card-info h5 {
+			margin-bottom: 5px;
+			font-size: 1.1em;
+		}
+
+		.urun-card-info p {
+			margin-bottom: 3px;
+			font-size: 0.9em;
+			color: #555;
+		}
+
+	.urun-card-actions {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		margin-top: 10px;
+	}
+
+		.urun-card-actions .adet-input {
+			width: 60px;
+			padding: 5px;
+			text-align: center;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.urun-card-actions .remove-btn {
+			color: #dc3545; /* Kırmızı */
+			text-decoration: none;
+			font-size: 1.2em;
+			transition: color 0.2s;
+		}
+
+			.urun-card-actions .remove-btn:hover {
+				color: #c82333;
+			}
+
+	.no-items-message {
+		text-align: center;
+		padding: 50px 0;
+		color: #666;
+	}
+
+	@@media (max-width: 768px) {
+		.sepet-container
+
+	{
+		flex-direction: column;
+	}
+
+	.urunler-kismi, .ozet-kismi {
+		flex: auto; /* Dikeyde genişlesin */
+		width: 100%; /* Tam genişlik kaplasın */
+	}
+	}
+</style>
+
+<div class="breadcrumb-area mb-70">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="breadcrumb-content text-center">
+					<div class="breadcrumb-title">
+						<h3><a href="#">Sepetim</a></h3>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container mt-5">
+    <div class="sepet-container">
+        <div class="urunler-kismi" id="cart-items-container">
+            @if (urunler != null && urunler.Any())
+            {
+                foreach (var urun in urunler)
+                {
+                    <div class="urun-card" data-sepet-id="@urun.SepetId">
+                        <a href="/Urun/Detay/@urun.UrunSeo">
+                            <img src="@urun.UrunResimUrl" alt="@urun.UrunAdi" />
+                        </a>
+                        <div class="urun-card-info">
+                            <h5><a href="/Urun/Detay/@urun.UrunSeo">@urun.UrunAdi</a></h5>
+                            <p>Ürün Fiyat: <span class="urun-birim-fiyat" data-price="@urun.BirimFiyat">@urun.BirimFiyat.ToString("C2")</span></p>
+                            <p>Toplam: <span class="urun-toplam-fiyat">@((urun.BirimFiyat * urun.Adet).ToString("C2"))</span></p>
+                            
+                            <div class="urun-card-actions">
+                                <span>Adet: </span>
+                                <input type="number" 
+                                       value="@urun.Adet" 
+                                       min="1" 
+                                       max="@urun.Stok" 
+                                       class="adet-input" 
+                                       data-sepet-id="@urun.SepetId"
+                                       data-old-quantity="@urun.Adet"
+                                       data-birim-fiyat="@urun.BirimFiyat"
+                                       data-stok="@urun.Stok">
+                                <a href="#" class="remove-btn" data-sepet-id="@urun.SepetId"><i class="fa fa-times"></i> Sil</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="no-items-message" id="no-cart-items-message">
+                    <p>Sepetinizde ürün bulunmamaktadır.</p>
+                    <a href="/" class="btn btn-primary mt-3">Alışverişe Başla</a>
+                </div>
+            }
+        </div>
+
+        <div class="ozet-kismi">
+            <h4>Sepet Özeti</h4>
+            <p>Toplam Tutar: <strong id="cart-grand-total">@toplam.ToString("C2")</strong></p>
+
+            <a href="@(
+               Context.Request.Cookies["UserSession"] == null
+               ? Url.Action("GirisYap", "Uye")
+               : Url.Action("AdresSec", "Siparis")
+               )"
+               class="btn btn-success w-100 mt-3 @(sepetBosMu ? "disabled-link" : "")"
+               @(sepetBosMu ? "tabindex='-1' aria-disabled='true'" : "")
+               id="adresSecBtn">
+                @if (Context.Request.Cookies["UserSession"] == null)
+                {
+                    <span>Giriş Yap / Üye Ol</span>
+                }
+                else
+                {
+                    <span>Adres Seçimine Geç</span>
+                }
+            </a>
+        </div>
+    </div>
+    <br />
+</div>
+
+@section Scripts {
+<script>
+
+$(document).ready(function() {
+    $('.adet-input').on('change', function() {
+        let input = $(this);
+        let yeniAdet = parseInt(input.val());
+        if (isNaN(yeniAdet) || yeniAdet < 1) {
+            alert("Adet 1'den küçük olamaz.");
+            input.val(input.data('old-quantity'));
+            return;
+        }
+        let sepetId = input.data('sepet-id');
+        let maxStok = parseInt(input.data('stok'));
+        if (yeniAdet > maxStok) {
+            alert("Üzgünüz, stokta bu kadar ürün yok.");
+            input.val(input.data('old-quantity'));
+            return;
+        }
+        $.ajax({
+            url: '@Url.Action("SepetAdetGuncelle", "Sepet")',
+            type: 'POST',
+            data: { sepetId: sepetId, yeniAdet: yeniAdet },
+            success: function(response) {
+                if (response.basarili) {
+                    input.data('old-quantity', yeniAdet);
+
+                    input.closest('.urun-card').find('.urun-toplam-fiyat')
+                        .text(response.yeniToplamFiyat.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }));
+
+                    $('#cart-grand-total')
+                        .text(response.yeniSepetToplam.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }));
+                } else {
+                    alert(response.mesaj);
+                    input.val(input.data('old-quantity'));
+                }
+            },
+            error: function() {
+                alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+                input.val(input.data('old-quantity'));
+            }
+        });
+                var sepetBosMu = @((sepetBosMu).ToString().ToLower());
+            if (sepetBosMu) {
+                $('#adresSecBtn').on('click', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+            }
+    });
+
+    // Ürün silme
+            $(document).on('click', '.remove-btn', function(e) {
+            e.preventDefault();
+            let sepetId = $(this).data('sepet-id');
+            let urunCard = $(this).closest('.urun-card');
+
+            $.post("/Sepet/SepetUrunSil", { sepetId: sepetId }, function(response) {
+                if (response.basarili) {
+                    urunCard.remove();
+
+                    $('#cart-grand-total').text(response.yeniSepetToplam.toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }));
+
+                    if ($('.urun-card').length === 0) {
+                        $('#cart-items-container').html('<div class="no-items-message"><p>Sepetinizde ürün bulunmamaktadır.</p><a href="/" class="btn btn-primary mt-3">Alışverişe Başla</a></div>');
+                        $('#cart-grand-total').text((0).toLocaleString('tr-TR', { style: 'currency', currency: 'TRY' }));
+                    }
+
+                    alert(response.mesaj);
+                    updateCartNavbarCount();
+                } else {
+                    alert(response.mesaj);
+                }
+            }).fail(function() {
+                alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+            });
+        });
+
+});
+</script>
+}
+
+
+

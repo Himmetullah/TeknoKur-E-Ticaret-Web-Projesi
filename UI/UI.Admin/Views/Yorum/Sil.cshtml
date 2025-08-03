@@ -1,0 +1,31 @@
+﻿@model Layer.Data.TblYorum
+@{
+	ViewData["Title"] = "Sil";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+	<h5>(@Model.YorumIcerik) bu yorumu silmek istediğinden emin misin ?</h5>
+	<dl class="row">
+		<dt class="col-sm-2">
+			Yorum Id
+		</dt>
+
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.YorumId)
+		</dd>
+		<dt class="col-sm-2">
+			Yorum İçerik
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.YorumIcerik)
+		</dd>
+	</dl>
+
+	<form asp-controller="Yorum" asp-action="Sil" method="post">
+		@Html.AntiForgeryToken()
+		<input type="hidden" name="id" value="@Model.YorumId" />
+		<input type="submit" value="Sil" class="btn btn-danger" />
+		<a href="/Yorum">geri dön</a>
+	</form>
+</div>
+

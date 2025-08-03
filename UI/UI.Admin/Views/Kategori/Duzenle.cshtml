@@ -1,0 +1,62 @@
+﻿@model Layer.Data.TblKategoriler
+@{
+	ViewData["Title"] = "Duzenle";
+	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="alert alert-danger">
+		@ViewBag.ErrorMessage
+	</div>
+}
+<div class="row">
+	<h2>Kategori Düzenleme Formu</h2>
+	<hr />
+	<div class="col-md-4">
+
+		@using (Html.BeginForm("Duzenle", "Kategori", FormMethod.Post))
+		{
+			<input type="hidden" value="@Model.KategoriId" name="KategoriId" />
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="KategoriAdi" placeholder="Benzersiz Kategori Adı" name="KategoriAdi"
+						   value="@Model.KategoriAdi">
+					<label for="KategoriAdi">Kategori Adı</label>
+				</div>
+			</div>
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					@Html.DropDownList("UstKategoriId", ViewBag.Kategoriler as List<SelectListItem>, "Üst Kategori Seçiniz", new { @class = "form-select" })
+					<label for="UstKategoriId">Üst Kategori</label>
+				</div>
+			</div>
+
+			<div class="card-body demo-vertical-spacing demo-only-element">
+				<div class="form-floating form-floating-outline mb-6">
+					<input type="text" class="form-control" id="KategoriSeo" placeholder="Benzersiz Kategori Seo" name="KategoriSeo"
+						   value="@(Model != null ? Model.KategoriSeo : "")">
+					<label for="KategoriSeo">Kategori Seo</label>
+				</div>
+			</div>
+					
+			<div class="col-md-12">
+				<div class="d-flex align-items-center justify-content-md-end justify-content-center">
+					<a href="/Kategori">geri dön</a>
+					<div class="add-new">
+						<button class="btn btn-primary waves-effect waves-light" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAddUser">
+							<i class="ri-add-line me-0 me-sm-1 d-inline-block d-sm-none"></i>
+							<span class="d-none d-sm-inline-block"> Kaydet </span>
+						</button>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+
+
+
+
